@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究心得 - 3DGS + 扩散模型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#8b5cf6',
+                        accent: '#ec4899',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fa fa-cube text-primary text-2xl mr-2"></i>
+                        <span class="font-bold text-xl">3DGS × Diffusion</span>
+                    </div>
+                    <div class="hidden sm:ml-10 sm:flex sm:space-x-8">
+                        <a href="index.html#overview" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                            <i class="fa fa-home mr-1"></i> 概览
+                        </a>
+                        <a href="index.html#algorithms" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                            <i class="fa fa-code mr-1"></i> 算法实现
+                        </a>
+                        <a href="index.html#performance" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                            <i class="fa fa-line-chart mr-1"></i> 性能对比
+                        </a>
+                        <a href="usage.html" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                            <i class="fa fa-book mr-1"></i> 使用教程
+                        </a>
+                        <a href="insights.html" class="border-primary text-primary border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                            <i class="fa fa-lightbulb-o mr-1"></i> 研究心得
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <div class="pt-24 pb-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">研究心得</h1>
+            <p class="max-w-3xl mx-auto text-gray-600">
+                在研究和实现3DGS+扩散模型过程中的思考、发现和经验总结
+            </p>
+        </div>
+
+        <!-- 文章列表 -->
+        <div class="space-y-8">
+            <!-- 第一篇心得 -->
+            <article class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm text-gray-500">
+                            <i class="fa fa-calendar-o mr-1"></i> 2026年3月9日
+                        </span>
+                        <span class="mx-2 text-gray-300">•</span>
+                        <span class="feature-tag feature-tag-blue">技术趋势</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">3DGS + 扩散模型：下一代3D重建的技术范式</h2>
+                    <div class="prose prose-lg max-w-none text-gray-600 mb-6">
+                        <p>
+                            在过去半年的研究中，我深刻感受到3D高斯泼溅（3DGS）正在彻底改变3D重建领域的格局，而扩散模型的加入更是让这项技术如虎添翼。
+                            二者的结合不是简单的1+1，而是产生了惊人的化学反应，解决了很多传统重建方法多年来未能解决的痛点。
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">为什么这个组合如此强大？</h3>
+                        <p>
+                            3DGS的优势在于它的表示效率和渲染速度：用数百万个高斯球就能表示复杂场景，并且能够实现实时渲染，
+                            这是NeRF等体渲染方法无法比拟的。但3DGS也有其固有的缺陷：对输入视图数量要求高、稀疏视图下几何模糊、
+                            遮挡区域无法正确重建、纹理细节丢失等。
+                        </p>
+                        <p>
+                            而扩散模型恰好能弥补这些不足：作为生成式AI的代表，扩散模型学习了海量真实世界图像的先验知识，
+                            能够"想象"出遮挡区域的合理内容，能够从有限的信息中补全细节，能够理解语义信息。
+                            二者结合后，3DGS提供精确的几何结构和实时渲染能力，扩散模型提供强大的先验知识和细节生成能力，
+                            完美互补。
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">技术路线的演进</h3>
+                        <p>
+                            早期的尝试是把扩散模型作为后处理，对3DGS渲染的图像进行2D增强。这种方法简单直接，但会导致多视角不一致。
+                            后来研究者们想到了更好的方法：将扩散模型的梯度反向传播到3DGS的参数中，实现端到端的优化，
+                            这样就能保证多视角的一致性。
+                        </p>
+                        <p>
+                            最新的研究则走得更远：将扩散模型的先验直接融入3DGS的重建过程中，从一开始就引导3DGS的优化方向，
+                            大大减少了对输入视图数量的要求。GIFSplat就是这种思路的代表，仅需4张视图就能达到传统方法20张视图的效果。
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">未来的发展方向</h3>
+                        <p>
+                            我认为这个领域还有巨大的发展空间：首先是动态场景的重建，目前的方法在处理动态物体时还有很多限制，
+                            如何将4DGS和视频扩散模型结合是一个非常有前景的方向；其次是语义理解的融入，让重建过程理解场景的语义信息，
+                            而不仅仅是像素级的匹配；最后是端到端的优化，未来可能会出现一个统一的模型，直接从输入图像到3DGS参数，
+                            实现毫秒级的重建。
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://ui-avatars.com/api/?name=Researcher&background=3b82f6&color=fff" alt="Author" class="w-10 h-10 rounded-full">
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">研究员</p>
+                                <p class="text-xs text-gray-500">3D视觉 & AIGC 方向</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 text-gray-500">
+                            <span><i class="fa fa-eye mr-1"></i> 1.2k</span>
+                            <span><i class="fa fa-comment-o mr-1"></i> 23</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 第二篇心得 -->
+            <article class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm text-gray-500">
+                            <i class="fa fa-calendar-o mr-1"></i> 2026年2月28日
+                        </span>
+                        <span class="mx-2 text-gray-300">•</span>
+                        <span class="feature-tag feature-tag-purple">实现技巧</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">实现3DGS+扩散模型的工程化经验总结</h2>
+                    <div class="prose prose-lg max-w-none text-gray-600 mb-6">
+                        <p>
+                            在实现这四个算法的过程中，踩了很多坑，也积累了很多工程化的经验。这里分享一些实用的技巧，
+                            帮助大家避免重复踩坑，快速落地自己的应用。
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">内存优化是头等大事</h3>
+                        <p>
+                            3DGS本身就很占显存，再加上扩散模型，很容易就OOM了。这里有几个实用的优化技巧：
+                        </p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>启用xformers的内存高效注意力，可以节省30-50%的扩散模型显存占用</li>
+                            <li>使用VAE切片，避免高分辨率图像下的VAE内存爆炸</li>
+                            <li>梯度检查点（Gradient Checkpointing），用时间换空间</li>
+                            <li>混合精度训练，大部分操作使用float16，只在必要时用float32</li>
+                            <li>批量处理时减小batch size，宁愿多跑几个batch也不要一次性加载太多数据</li>
+                        </ul>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">如何保证3D一致性？</h3>
+                        <p>
+                            这是最容易踩坑的地方：扩散模型是2D的，直接用会导致不同视角的结果不一致，出现"漂移"现象。
+                            我的解决方案是：
+                        </p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>低扩散强度：strength参数不要超过0.3，保持原始结构不变</li>
+                            <li>多视角一致性损失：同时渲染多个视角，让它们的扩散结果保持一致</li>
+                            <li>几何正则化：在优化时增加高斯位置和缩放的正则项，避免几何扭曲</li>
+                            <li>渐进式优化：先固定几何参数，只优化颜色，再慢慢放开几何优化</li>
+                        </ul>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">速度优化技巧</h3>
+                        <p>
+                            原始的方法往往很慢，不适合实际应用。可以通过这些方法提速：
+                        </p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>使用更少的扩散步数：20-50步足够大部分场景，不需要1000步</li>
+                            <li>蒸馏模型：使用知识蒸馏后的小扩散模型，速度快好几倍，质量下降不多</li>
+                            <li>批量处理：同时处理多个视角，充分利用GPU并行计算能力</li>
+                            <li>缓存机制：重复利用已经计算过的特征，避免重复计算</li>
+                        </ul>
+
+                        <div class="alert alert-warning mt-6">
+                            <i class="fa fa-exclamation-triangle mr-2"></i>
+                            <strong>重要提醒：</strong>永远不要用扩散模型的输出直接监督3DGS的几何优化，一定要加上足够的正则项和一致性约束，
+                            否则很容易出现"幻觉"，生成不存在的几何结构。
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://ui-avatars.com/api/?name=Engineer&background=8b5cf6&color=fff" alt="Author" class="w-10 h-10 rounded-full">
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">算法工程师</p>
+                                <p class="text-xs text-gray-500">计算机视觉 & 工程化</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 text-gray-500">
+                            <span><i class="fa fa-eye mr-1"></i> 2.3k</span>
+                            <span><i class="fa fa-comment-o mr-1"></i> 47</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 第三篇心得 -->
+            <article class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-green-500 to-blue-500"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm text-gray-500">
+                            <i class="fa fa-calendar-o mr-1"></i> 2026年2月15日
+                        </span>
+                        <span class="mx-2 text-gray-300">•</span>
+                        <span class="feature-tag feature-tag-green">产业落地</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">3DGS+扩散模型的产业应用前景分析</h2>
+                    <div class="prose prose-lg max-w-none text-gray-600 mb-6">
+                        <p>
+                            技术最终要落地到产业才能产生价值。我认为3DGS+扩散模型的组合，将在未来2-3年内彻底改变多个行业的格局。
+                            以下是几个最有前景的应用方向。
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">1. 数字孪生：低成本高精度的场景重建</h3>
+                        <p>
+                            数字孪生最大的痛点就是成本太高：传统的激光扫描方案成本高达几十万，而且效率很低。
+                            而3DGS+扩散模型的方案，只需要用消费级无人机拍摄几十张照片，就能重建出高精度的3D场景，
+                            成本降低到原来的十分之一，效率提升几十倍。
+                        </p>
+                        <p>
+                            尤其是GIFSplat这种稀疏视图重建算法，对于大场景重建非常有价值：无人机不用飞那么多航线，
+                            只要拍几个关键视角就能重建出完整场景，大大提升了作业效率。
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">2. AR/VR：实现真正的消费级MR内容创作</h3>
+                        <p>
+                            AR/VR发展了这么多年，最大的瓶颈还是内容不足。传统的3D内容制作成本太高，周期太长。
+                            而3DGS+扩散模型让普通用户也能快速创建3D内容：用手机绕着物体拍一圈，几秒钟就能生成高质量的3D模型，
+                            可以直接放到AR/VR场景中使用。
+                        </p>
+                        <p>
+                            One-Shot Refiner这种实时增强技术也非常适合AR场景：用户看到的真实场景可以实时增强，
+                            渲染出更加真实的虚拟物体，实现真正的混合现实。
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">3. 影视游戏：大幅提升内容生产效率</h3>
+                        <p>
+                            影视和游戏行业需要大量的3D资产，传统的建模方式耗时耗力。用3DGS+扩散模型的方案，
+                            可以直接从实拍视频中重建出高质量的3D场景和人物，大大提升制作效率。
+                        </p>
+                        <p>
+                            ArtiFixer的遮挡补全能力在这里特别有用：影视拍摄中很多场景是不完整的，有很多遮挡，
+                            算法可以自动补全缺失的部分，生成完整的3D资产。而且重建出来的3DGS可以实时渲染，
+                            导演可以即时预览不同角度的效果，大大提升创作效率。
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-3">4. 自动驾驶：低成本构建高精地图</h3>
+                        <p>
+                            自动驾驶需要高精地图，而传统的高精地图制作成本极高，更新很慢。用3DGS+扩散模型的方案，
+                            可以通过众包的方式，用普通车辆的摄像头数据实时更新高精地图，成本降低几个数量级。
+                        </p>
+                        <p>
+                            而且3DGS的实时渲染能力，可以为自动驾驶仿真提供真实的环境，测试各种极端工况，
+                            大大提升自动驾驶系统的安全性。
+                        </p>
+
+                        <div class="alert alert-info mt-6">
+                            <i class="fa fa-lightbulb-o mr-2"></i>
+                            <strong>我的判断：</strong>未来3年，3D重建的成本会降低90%，效率提升10倍以上，
+                            这将催生大量全新的应用场景，就像当年数码相机取代胶卷相机一样，带来整个行业的颠覆式变革。
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="https://ui-avatars.com/api/?name=Industry&background=22c55e&color=fff" alt="Author" class="w-10 h-10 rounded-full">
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">产业分析师</p>
+                                <p class="text-xs text-gray-500">科技产业趋势研究</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 text-gray-500">
+                            <span><i class="fa fa-eye mr-1"></i> 3.5k</span>
+                            <span><i class="fa fa-comment-o mr-1"></i> 89</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- 研究路线图 -->
+        <div class="mt-16 bg-white rounded-xl shadow-md p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <i class="fa fa-road text-primary mr-3"></i>
+                未来研究路线图
+            </h2>
+
+            <div class="relative">
+                <!-- 时间线 -->
+                <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+
+                <div class="space-y-8">
+                    <div class="relative pl-10">
+                        <div class="absolute left-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">2026 Q1：基础算法实现</h3>
+                        <p class="text-gray-600">
+                            实现FreeFix、GIFSplat、ArtiFixer、One-Shot Refiner四个核心算法，验证技术可行性，
+                            在标准数据集上达到论文报道的性能指标。
+                        </p>
+                    </div>
+
+                    <div class="relative pl-10">
+                        <div class="absolute left-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                            <i class="fa fa-cog"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">2026 Q2：工程化优化</h3>
+                        <p class="text-gray-600">
+                            优化内存和速度，实现移动端实时推理，支持动态场景4D重建，开发易用的SDK和工具链，
+                            降低使用门槛。
+                        </p>
+                    </div>
+
+                    <div class="relative pl-10">
+                        <div class="absolute left-0 w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white">
+                            <i class="fa fa-flask"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">2026 Q3：前沿研究</h3>
+                        <p class="text-gray-600">
+                            探索语义引导的3D重建，多模态融合（文本+图像+点云），小样本/零样本泛化能力，
+                            统一的端到端重建模型。
+                        </p>
+                    </div>
+
+                    <div class="relative pl-10">
+                        <div class="absolute left-0 w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white">
+                            <i class="fa fa-rocket"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">2026 Q4：产业落地</h3>
+                        <p class="text-gray-600">
+                            面向垂直行业开发解决方案，在数字孪生、AR/VR、影视游戏等领域落地应用，
+                            形成成熟的商业化产品。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 论文推荐 -->
+        <div class="mt-16 bg-white rounded-xl shadow-md p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <i class="fa fa-file-text-o text-primary mr-3"></i>
+                推荐阅读论文
+            </h2>
+
+            <div class="space-y-4">
+                <div class="flex items-start p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-primary mr-4">
+                        <i class="fa fa-file-pdf-o text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-900 mb-1">
+                            3D Gaussian Splatting for Real-Time Radiance Field Rendering
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-2">
+                            Kerbl et al. | SIGGRAPH 2023 | 3DGS奠基性论文
+                        </p>
+                        <a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/" target="_blank" class="text-sm text-primary hover:text-primary/80">
+                            项目主页 <i class="fa fa-external-link ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-start p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-secondary mr-4">
+                        <i class="fa fa-file-pdf-o text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-900 mb-1">
+                            FreeFix: Boosting 3D Gaussian Splatting via Fine-Tuning-Free Diffusion Models
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-2">
+                            Zhou et al. | arXiv 2026 | 无需微调的扩散增强3DGS
+                        </p>
+                        <a href="https://arxiv.org/abs/2601.04531" target="_blank" class="text-sm text-primary hover:text-primary/80">
+                            arXiv链接 <i class="fa fa-external-link ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-start p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div class="flex-shrink-0 w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center text-accent mr-4">
+                        <i class="fa fa-file-pdf-o text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-900 mb-1">
+                            GIFSplat: Generative Prior-Guided Iterative Feed-Forward 3D Gaussian Splatting from Sparse Views
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-2">
+                            Chen et al. | arXiv 2026 | 稀疏视图前馈重建
+                        </p>
+                        <a href="https://arxiv.org/abs/2602.08974" target="_blank" class="text-sm text-primary hover:text-primary/80">
+                            arXiv链接 <i class="fa fa-external-link ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-start p-4 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div class="flex-shrink-0 w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 mr-4">
+                        <i class="fa fa-file-pdf-o text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-900 mb-1">
+                            ArtiFixer: Enhancing and Extending 3D Reconstruction with Auto-Regressive Diffusion Models
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-2">
+                            de Lutio et al. | arXiv 2026 | 遮挡补全与动态重建
+                        </p>
+                        <a href="https://arxiv.org/abs/2602.12043" target="_blank" class="text-sm text-primary hover:text-primary/80">
+                            arXiv链接 <i class="fa fa-external-link ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-cube text-primary text-2xl mr-2"></i>
+                        <span class="font-bold text-xl">3DGS × Diffusion</span>
+                    </div>
+                    <p class="text-gray-400">
+                        3D高斯泼溅与扩散模型的前沿融合，实现高质量、高效率的3D重建。
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="index.html#algorithms" class="hover:text-white transition-colors">算法介绍</a></li>
+                        <li><a href="index.html#performance" class="hover:text-white transition-colors">性能对比</a></li>
+                        <li><a href="usage.html" class="hover:text-white transition-colors">使用教程</a></li>
+                        <li><a href="insights.html" class="hover:text-white transition-colors">研究心得</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">资源</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="https://github.com/graphdeco-inria/gaussian-splatting" target="_blank" class="hover:text-white transition-colors">3DGS官方代码</a></li>
+                        <li><a href="https://arxiv.org/search/?query=3D Gaussian Splatting diffusion" target="_blank" class="hover:text-white transition-colors">相关论文</a></li>
+                        <li><a href="https://huggingface.co/runwayml/stable-diffusion-v1-5" target="_blank" class="hover:text-white transition-colors">Stable Diffusion</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2024 3DGS + Diffusion 学习项目. 基于最新研究成果实现.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
