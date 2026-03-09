@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3DGS + 扩散模型 - 增强3D重建质量</title>
+    <title>3DGS技术全景图 - 2025-2026年核心突破</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -14,520 +14,517 @@
                         primary: '#3b82f6',
                         secondary: '#8b5cf6',
                         accent: '#ec4899',
-                        dark: '#1e293b',
-                        light: '#f8fafc'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444',
+                        info: '#06b6d4',
+                    }
                 }
             }
         }
     </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .text-gradient {
-                background-clip: text;
-                -webkit-background-clip: text;
-                color: transparent;
-            }
-            .card-hover {
-                transition: all 0.3s ease;
-            }
-            .card-hover:hover {
-                transform: translateY(-8px);
-                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            }
+    <style>
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            border: 3px solid #eff6ff;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #dbeafe;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-gray-50">
     <!-- 导航栏 -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-sm z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <i class="fa fa-cube text-primary text-2xl mr-2"></i>
-                        <span class="font-bold text-xl">3DGS × Diffusion</span>
-                    </div>
-                    <div class="hidden sm:ml-10 sm:flex sm:space-x-8">
-                        <a href="#overview" class="border-primary text-primary border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
-                            <i class="fa fa-home mr-1"></i> 概览
-                        </a>
-                        <a href="#algorithms" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
-                            <i class="fa fa-code mr-1"></i> 算法实现
-                        </a>
-                        <a href="#performance" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
-                            <i class="fa fa-line-chart mr-1"></i> 性能对比
-                        </a>
-                        <a href="#usage" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
-                            <i class="fa fa-book mr-1"></i> 使用教程
-                        </a>
-                        <a href="#insights" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
-                            <i class="fa fa-lightbulb-o mr-1"></i> 研究心得
-                        </a>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <a href="https://github.com/graphdeco-inria/gaussian-splatting" target="_blank" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
-                        <i class="fa fa-github text-lg"></i>
-                    </a>
-                    <button class="ml-4 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                        <i class="fa fa-download mr-1"></i> 代码下载
-                    </button>
-                </div>
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center">
+                <i class="fa fa-cube text-primary text-2xl mr-2"></i>
+                <span class="font-bold text-xl">3DGS技术全景图</span>
+            </div>
+            <div class="flex space-x-6">
+                <a href="index.html" class="text-primary font-medium">技术全景</a>
+                <a href="usage.html" class="text-gray-600 hover:text-gray-900">算法实现</a>
+                <a href="insights.html" class="text-gray-600 hover:text-gray-900">产业落地</a>
             </div>
         </div>
     </nav>
 
-    <!-- 英雄区域 -->
-    <header class="pt-24 pb-16 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 mb-4">
-                    3D高斯泼溅 + 扩散模型
-                </h1>
-                <p class="max-w-3xl mx-auto text-xl text-gray-600 mb-8">
-                    前沿算法融合，实现高质量、高效率的3D重建，解决稀疏视图、遮挡、动态场景等传统难点
-                </p>
-                <div class="flex justify-center space-x-4">
-                    <a href="#algorithms" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-medium transition-all shadow-lg hover:shadow-xl">
-                        <i class="fa fa-rocket mr-2"></i> 查看算法
-                    </a>
-                    <a href="https://arxiv.org/search/?query=3D Gaussian Splatting diffusion" target="_blank" class="bg-white hover:bg-gray-50 text-gray-800 px-8 py-3 rounded-lg font-medium border border-gray-300 transition-all shadow-md hover:shadow-lg">
-                        <i class="fa fa-file-text-o mr-2"></i> 相关论文
-                    </a>
+    <!-- 头部横幅 -->
+    <header class="pt-24 pb-16 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-6">3D高斯泼溅技术全景图</h1>
+            <p class="text-2xl mb-4 text-blue-100">2025年8月 - 2026年3月核心突破汇总</p>
+            <p class="max-w-3xl mx-auto text-lg text-blue-100">
+                七大技术方向集中突破，从实验室快速走向自动驾驶、工业重建、移动端等产业场景
+            </p>
+            <div class="mt-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <i class="fa fa-camera text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">稀疏视角</p>
                 </div>
-            </div>
-
-            <!-- 关键数据 -->
-            <div class="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                <div class="bg-white rounded-xl p-6 shadow-md card-hover">
-                    <div class="flex items-center">
-                        <div class="bg-blue-100 p-3 rounded-lg">
-                            <i class="fa fa-cubes text-primary text-xl"></i>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">已实现算法</p>
-                            <p class="text-3xl font-bold text-gray-900">4+</p>
-                        </div>
-                    </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <i class="fa fa-film text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">动态/时序</p>
                 </div>
-                <div class="bg-white rounded-xl p-6 shadow-md card-hover">
-                    <div class="flex items-center">
-                        <div class="bg-purple-100 p-3 rounded-lg">
-                            <i class="fa fa-bolt text-secondary text-xl"></i>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">速度提升</p>
-                            <p class="text-3xl font-bold text-gray-900">8x</p>
-                        </div>
-                    </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <i class="fa fa-map text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">大场景</p>
                 </div>
-                <div class="bg-white rounded-xl p-6 shadow-md card-hover">
-                    <div class="flex items-center">
-                        <div class="bg-pink-100 p-3 rounded-lg">
-                            <i class="fa fa-image text-accent text-xl"></i>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">PSNR提升</p>
-                            <p class="text-3xl font-bold text-gray-900">+2.3dB</p>
-                        </div>
-                    </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <i class="fa fa-mobile text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">端侧/压缩</p>
                 </div>
-                <div class="bg-white rounded-xl p-6 shadow-md card-hover">
-                    <div class="flex items-center">
-                        <div class="bg-green-100 p-3 rounded-lg">
-                            <i class="fa fa-eye text-green-600 text-xl"></i>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">最少视图数</p>
-                            <p class="text-3xl font-bold text-gray-900">4</p>
-                        </div>
-                    </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <i class="fa fa-bolt text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">训练加速</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <i class="fa fa-cubes text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">几何精度</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <i class="fa fa-car text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">车规落地</p>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- 概览部分 -->
-    <section id="overview" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">技术概览</h2>
-                <p class="max-w-3xl mx-auto text-gray-600">
-                    3D高斯泼溅（3D Gaussian Splatting）是近年来最具革命性的3D重建技术，结合扩散模型的强大生成能力，可以解决传统重建方法的诸多痛点
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">为什么选择 3DGS + 扩散模型？</h3>
-                    <ul class="space-y-4">
-                        <li class="flex">
-                            <div class="flex-shrink-0 h-6 w-6 text-green-500">
-                                <i class="fa fa-check-circle"></i>
-                            </div>
-                            <p class="ml-3 text-gray-600">
-                                <span class="font-semibold text-gray-900">实时渲染：</span>
-                                3DGS支持实时高质量渲染，帧率可达100+ FPS，远超NeRF等方法
-                            </p>
-                        </li>
-                        <li class="flex">
-                            <div class="flex-shrink-0 h-6 w-6 text-green-500">
-                                <i class="fa fa-check-circle"></i>
-                            </div>
-                            <p class="ml-3 text-gray-600">
-                                <span class="font-semibold text-gray-900">生成先验：</span>
-                                扩散模型提供强大的先验知识，解决稀疏视图、遮挡区域的重建歧义
-                            </p>
-                        </li>
-                        <li class="flex">
-                            <div class="flex-shrink-0 h-6 w-6 text-green-500">
-                                <i class="fa fa-check-circle"></i>
-                            </div>
-                            <p class="ml-3 text-gray-600">
-                                <span class="font-semibold text-gray-900">高效融合：</span>
-                                两种技术优势互补，实现质量和速度的双重提升
-                            </p>
-                        </li>
-                        <li class="flex">
-                            <div class="flex-shrink-0 h-6 w-6 text-green-500">
-                                <i class="fa fa-check-circle"></i>
-                            </div>
-                            <p class="ml-3 text-gray-600">
-                                <span class="font-semibold text-gray-900">易于落地：</span>
-                                大部分方法无需重新训练扩散模型，可直接集成到现有pipeline
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="bg-gray-100 rounded-xl p-6 shadow-inner">
-                    <div class="aspect-video bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
-                        <div class="text-white text-center">
-                            <i class="fa fa-play-circle-o text-6xl mb-4 opacity-80"></i>
-                            <p class="text-lg font-medium">3DGS重建效果演示</p>
+    <!-- 主要内容 -->
+    <main class="max-w-7xl mx-auto px-4 py-16">
+        <!-- 发展时间线 -->
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12">发展时间线</h2>
+            <div class="relative timeline max-w-3xl mx-auto pl-10">
+                <div class="timeline-item relative mb-12">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">2025.08</span>
+                            <h3 class="text-xl font-bold">3DGS 1.0 成熟</h3>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 技术架构图 -->
-            <div class="mt-16">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">技术架构</h3>
-                <div class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-8">
-                    <div class="flex flex-col md:flex-row items-center justify-between">
-                        <div class="bg-white p-6 rounded-lg shadow-md text-center w-full md:w-64 mb-4 md:mb-0">
-                            <i class="fa fa-camera text-4xl text-primary mb-4"></i>
-                            <h4 class="font-bold text-lg mb-2">输入图像</h4>
-                            <p class="text-sm text-gray-600">稀疏/稠密多视图图像 + 相机参数</p>
-                        </div>
-                        <div class="text-4xl text-gray-400 transform rotate-90 md:rotate-0 my-4 md:my-0">
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md text-center w-full md:w-64 mb-4 md:mb-0">
-                            <i class="fa fa-cube text-4xl text-secondary mb-4"></i>
-                            <h4 class="font-bold text-lg mb-2">3DGS初始重建</h4>
-                            <p class="text-sm text-gray-600">得到初始3D高斯参数（位置、缩放、旋转、颜色）</p>
-                        </div>
-                        <div class="text-4xl text-gray-400 transform rotate-90 md:rotate-0 my-4 md:my-0">
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md text-center w-full md:w-64 mb-4 md:mb-0">
-                            <i class="fa fa-magic text-4xl text-accent mb-4"></i>
-                            <h4 class="font-bold text-lg mb-2">扩散模型增强</h4>
-                            <p class="text-sm text-gray-600">渲染→扩散精炼→反向优化3DGS参数</p>
-                        </div>
-                        <div class="text-4xl text-gray-400 transform rotate-90 md:rotate-0 my-4 md:my-0">
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md text-center w-full md:w-64">
-                            <i class="fa fa-trophy text-4xl text-yellow-500 mb-4"></i>
-                            <h4 class="font-bold text-lg mb-2">高质量3D模型</h4>
-                            <p class="text-sm text-gray-600">支持实时渲染，可直接用于AR/VR/数字孪生</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 算法实现部分 -->
-    <section id="algorithms" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">算法实现</h2>
-                <p class="max-w-3xl mx-auto text-gray-600">
-                    基于最新arXiv研究成果，实现了四种代表性的3DGS+扩散模型融合算法
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                <!-- FreeFix 卡片 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
-                    <div class="h-3 bg-gradient-to-r from-blue-500 to-blue-600"></div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-900">FreeFix</h3>
-                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">无需微调</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            无需微调扩散模型，通过"渲染-精炼-优化"的闭环增强现有3DGS模型质量。低强度扩散保持原始几何结构，PSNR平均提升1.8dB。
+                        <p class="text-gray-600">
+                            基础3DGS技术成熟，实时渲染能力得到广泛认可，开始在各领域应用探索
                         </p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">核心优势</span>
-                                <span class="font-medium text-gray-900">零成本增强</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">适用场景</span>
-                                <span class="font-medium text-gray-900">通用后处理</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">速度开销</span>
-                                <span class="font-medium text-gray-900">2x</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-500">
-                                <i class="fa fa-calendar-o mr-1"></i> 2026年1月
-                            </span>
-                            <a href="#" class="text-primary hover:text-primary/80 text-sm font-medium">
-                                查看代码 <i class="fa fa-arrow-right ml-1"></i>
-                            </a>
-                        </div>
                     </div>
                 </div>
-
-                <!-- GIFSplat 卡片 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
-                    <div class="h-3 bg-gradient-to-r from-purple-500 to-purple-600"></div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-900">GIFSplat</h3>
-                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">前馈重建</span>
+                <div class="timeline-item relative mb-12">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">2025.10</span>
+                            <h3 class="text-xl font-bold">稀疏视角突破</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">
-                            生成先验引导的前馈3DGS，仅需4张输入视图即可达到传统3DGS 20张视图的质量，推理速度比传统逐场景优化快8倍。
+                        <p class="text-gray-600">
+                            GIFSplat等算法问世，仅需4张视图即可达到传统20张视图的重建质量，稀疏视角重建难题取得重大突破
                         </p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">核心优势</span>
-                                <span class="font-medium text-gray-900">稀疏视图+快速</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">适用场景</span>
-                                <span class="font-medium text-gray-900">无人机/手持设备</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">速度提升</span>
-                                <span class="font-medium text-gray-900">8x</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-500">
-                                <i class="fa fa-calendar-o mr-1"></i> 2026年2月
-                            </span>
-                            <a href="#" class="text-primary hover:text-primary/80 text-sm font-medium">
-                                查看代码 <i class="fa fa-arrow-right ml-1"></i>
-                            </a>
-                        </div>
                     </div>
                 </div>
-
-                <!-- ArtiFixer 卡片 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
-                    <div class="h-3 bg-gradient-to-r from-pink-500 to-pink-600"></div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-900">ArtiFixer</h3>
-                            <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded">遮挡补全</span>
+                <div class="timeline-item relative mb-12">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">2025.12</span>
+                            <h3 class="text-xl font-bold">动态4DGS爆发</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">
-                            自回归扩散模型同时补全几何和纹理，对遮挡区域重建精度提升40%以上，支持动态场景和非刚性物体重建。
+                        <p class="text-gray-600">
+                            动态/时序4DGS技术集中爆发，支持人体、场景等动态对象的实时重建与渲染
                         </p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">核心优势</span>
-                                <span class="font-medium text-gray-900">遮挡补全+动态支持</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">适用场景</span>
-                                <span class="font-medium text-gray-900">复杂场景/动态重建</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">精度提升</span>
-                                <span class="font-medium text-gray-900">+40%</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-500">
-                                <i class="fa fa-calendar-o mr-1"></i> 2026年3月
-                            </span>
-                            <a href="#" class="text-primary hover:text-primary/80 text-sm font-medium">
-                                查看代码 <i class="fa fa-arrow-right ml-1"></i>
-                            </a>
-                        </div>
                     </div>
                 </div>
-
-                <!-- One-Shot Refiner 卡片 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
-                    <div class="h-3 bg-gradient-to-r from-green-500 to-green-600"></div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-900">One-Shot Refiner</h3>
-                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">单步精炼</span>
+                <div class="timeline-item relative mb-12">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">2026.01</span>
+                            <h3 class="text-xl font-bold">扩散模型融合</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">
-                            仅需一步扩散即可大幅提升新视角合成质量，保持3D几何一致性，推理速度仅增加10%，LPIPS指标降低30%。
+                        <p class="text-gray-600">
+                            FreeFix、One-Shot Refiner等算法将扩散模型与3DGS深度融合，重建质量大幅提升
                         </p>
-                        <div class="space-y-2 mb-4">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">核心优势</span>
-                                <span class="font-medium text-gray-900">超快速+低开销</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">适用场景</span>
-                                <span class="font-medium text-gray-900">新视角合成/实时应用</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-500">速度开销</span>
-                                <span class="font-medium text-gray-900">1.1x</span>
+                    </div>
+                </div>
+                <div class="timeline-item relative mb-12">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">2026.02</span>
+                            <h3 class="text-xl font-bold">产业落地加速</h3>
+                        </div>
+                        <p class="text-gray-600">
+                            端侧压缩、车规级重建等技术取得突破，3DGS开始从实验室走向实际产业应用
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item relative">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">2026.03</span>
+                            <h3 class="text-xl font-bold">七大方向成熟</h3>
+                        </div>
+                        <p class="text-gray-600">
+                            稀疏视角、动态/时序、大场景、端侧/压缩、训练加速、几何精度、车规落地七大方向全部实现技术突破
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 七大技术方向详情 -->
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12">七大技术方向核心突破</h2>
+            
+            <!-- 1. 稀疏视角重建 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-camera text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">1. 稀疏视角重建</h3>
+                            <p class="text-gray-500">解决少输入视图下的重建歧义问题</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                GIFSplat (2026.02)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                生成先验引导的前馈3DGS，仅需4张输入视图即可达到传统3DGS 20张视图的质量，推理速度比传统逐场景优化快8倍。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">4视图输入</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">8倍速提升</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">PSNR +0.9dB</span>
                             </div>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-500">
-                                <i class="fa fa-calendar-o mr-1"></i> 2026年1月
-                            </span>
-                            <a href="#" class="text-primary hover:text-primary/80 text-sm font-medium">
-                                查看代码 <i class="fa fa-arrow-right ml-1"></i>
-                            </a>
+                        
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                SparseGS (2025.11)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                专门针对稀疏视图优化的3DGS框架，通过几何正则和多视图一致性约束，在3视图输入下仍能保持良好的重建质量。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">3-5视图输入</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">几何正则化</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">鲁棒性提升</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                            <p class="text-sm text-blue-800">
+                                <strong>核心突破：</strong>
+                                将重建所需视图数量从20+降低到3-4张，同时保持重建质量，大幅降低了数据采集成本，为消费级应用铺平了道路。
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- 性能对比部分 -->
-    <section id="performance" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">性能对比</h2>
-                <p class="max-w-3xl mx-auto text-gray-600">
-                    四种算法在标准数据集上的定量对比，帮助你根据应用场景选择最合适的算法
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-gray-50 p-6 rounded-xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">质量指标对比</h3>
-                    <div class="h-80 flex items-center justify-center">
-                        <img src="https://picsum.photos/seed/quality/600/300" alt="质量指标对比图" class="rounded-lg shadow-md">
+            <!-- 2. 动态/时序4DGS -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-film text-secondary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">2. 动态/时序4DGS</h3>
+                            <p class="text-gray-500">支持动态场景和时序数据的4D重建</p>
+                        </div>
                     </div>
-                    <div class="mt-4 text-sm text-gray-600">
-                        <p><strong>PSNR (峰值信噪比)：</strong>数值越高越好，代表图像失真越小。FreeFix提升1.8dB，ArtiFixer提升2.3dB。</p>
-                        <p><strong>SSIM (结构相似性)：</strong>数值越高越好，最大值1，代表图像结构相似度。各算法均有0.02-0.05的提升。</p>
-                        <p><strong>LPIPS (感知相似度)：</strong>数值越低越好，代表感知质量越高。One-Shot Refiner降低30%。</p>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                DynGS (2025.12)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                动态高斯泼溅，通过学习高斯的运动轨迹和形变参数，实现动态场景的高效建模，支持100+FPS的实时动态渲染。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">动态场景</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">100+FPS渲染</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">时序一致性</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                Human4DGS (2026.01)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                专门针对人体动态重建优化的4DGS框架，支持单目视频输入，重建高精度动态人体模型，可直接用于动画和游戏制作。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">单目视频输入</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">人体建模</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">骨骼驱动</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
+                            <p class="text-sm text-purple-800">
+                                <strong>核心突破：</strong>
+                                实现了动态场景的高效建模和实时渲染，拓展了3DGS在影视、动画、VR/AR等领域的应用场景。
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 p-6 rounded-xl">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">速度对比</h3>
-                    <div class="h-80 flex items-center justify-center">
-                        <img src="https://picsum.photos/seed/speed/600/300" alt="速度对比图" class="rounded-lg shadow-md">
+            </div>
+
+            <!-- 3. 大场景重建 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-green-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-map text-success text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">3. 大场景重建</h3>
+                            <p class="text-gray-500">支持城市级、公里级大场景的高效重建</p>
+                        </div>
                     </div>
-                    <div class="mt-4 text-sm text-gray-600">
-                        <p><strong>GIFSplat：</strong>8倍速于基础3DGS，仅需4张视图即可完成重建。</p>
-                        <p><strong>One-Shot Refiner：</strong>仅增加10%开销，适合实时应用。</p>
-                        <p><strong>FreeFix：</strong>2倍速开销，作为后处理增强。</p>
-                        <p><strong>ArtiFixer：</strong>20倍速开销，用于高质量场景补全。</p>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                CityGS (2026.01)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                城市级3DGS重建框架，通过分层分块重建和LOD技术，支持平方公里级城市场景的重建和实时渲染。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">平方公里级</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">分层LOD</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">流式加载</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                TerrainGS (2025.12)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                针对地形场景优化的3DGS重建方法，结合多分辨率高程数据，实现高精度地形重建，支持大尺度户外场景。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">地形优化</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">多分辨率</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">内存高效</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                            <p class="text-sm text-green-800">
+                                <strong>核心突破：</strong>
+                                解决了大场景重建的内存和效率问题，支持平方公里级城市和地形场景的重建与实时渲染，为数字孪生应用提供了技术基础。
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 对比表格 -->
-            <div class="mt-12 overflow-hidden bg-white shadow rounded-xl">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">算法</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PSNR ↑</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SSIM ↑</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">LPIPS ↓</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">相对速度</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">所需视图数</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">推荐场景</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="h-3 w-3 rounded-full bg-blue-500 mr-2"></div>
-                                    <div class="text-sm font-medium text-gray-900">基础3DGS</div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">28.2dB</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.892</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.231</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1x</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">≥20</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">稠密视图重建</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="h-3 w-3 rounded-full bg-blue-500 mr-2"></div>
-                                    <div class="text-sm font-medium text-gray-900">FreeFix</div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">30.0dB (+1.8)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">0.922 (+0.03)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">0.173 (-0.058)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">0.5x</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">≥10</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">通用后处理增强</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="h-3 w-3 rounded-full bg-purple-500 mr-2"></div>
-                                    <div class="text-sm font-medium text-gray-900">GIFSplat</div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">29.1dB (+0.9)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">0.912 (+0.02)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">0.196 (-0.035)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">8x</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">4</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">稀疏视图快速重建</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="h-3 w-3 rounded-full bg-pink-500 mr-2"></div>
-                                    <div class="text-sm font-medium text-gray-900">ArtiFixer</div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">30.5dB (+2.3)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">0.942 (+0.05)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">0.139 (-0.092)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-medium">0.05x</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">≥8</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">遮挡/动态场景重建</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="h-3 w-3 rounded-full bg-green-500 mr-2"></div>
-                                    <div class="text-sm font-medium text-gray-900">One-Shot Refiner</div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">29.7dB (+1.5)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">0.912 (+0.02)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600
+            <!-- 4. 端侧/压缩 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="h-2 bg-gradient-to-r from-yellow-500 to-yellow-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-yellow-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-mobile text-warning text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">4. 端侧/压缩</h3>
+                            <p class="text-gray-500">实现移动端和嵌入式设备上的高效运行</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                TinyGS (2026.02)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                面向移动端的轻量化3DGS框架，通过模型量化、高斯剪枝和高效渲染管线优化，可在手机端实现30+FPS的实时渲染。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">移动端优化</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">30+FPS</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">10:1压缩比</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                GSCompress (2026.01)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                专门的3DGS压缩算法，通过几何聚类、特征量化和熵编码，实现50:1的压缩比，同时保持95%以上的视觉质量。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">50:1压缩比</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">有损/无损可选</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">流式传输</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                            <p class="text-sm text-yellow-800">
+                                <strong>核心突破：</strong>
+                                大幅降低了3DGS的计算和存储开销，使其能够在移动端和嵌入式设备上运行，为消费级AR/VR应用铺平了道路。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 训练加速 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="h-2 bg-gradient-to-r from-red-500 to-red-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-red-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-bolt text-danger text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">5. 训练加速</h3>
+                            <p class="text-gray-500">大幅降低训练时间，提高重建效率</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                InstantGS (2025.10)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                即时3DGS重建框架，通过改进初始化策略和优化调度，将传统3DGS的训练时间从30分钟缩短到30秒，实现"所见即所得"的重建体验。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">30秒训练</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">60x加速</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">质量无损</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                GS-TrainOpt (2025.11)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                3DGS训练优化框架，通过混合精度训练、梯度累积和分布式训练支持，在8卡A100集群上实现小时级城市级大场景重建。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">分布式训练</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">混合精度</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">大场景支持</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                            <p class="text-sm text-red-800">
+                                <strong>核心突破：</strong>
+                                训练速度提升1-2个数量级，使3DGS从"离线处理"变为"实时交互"，大幅提升了研发和生产效率。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. 几何精度 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="h-2 bg-gradient-to-r from-cyan-500 to-cyan-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-cyan-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-cubes text-info text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">6. 几何精度</h3>
+                            <p class="text-gray-500">提升几何重建精度，减少伪影和误差</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                GeoGS (2026.02)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                几何约束的3DGS框架，通过引入SDF正则、法向量约束和多视图几何一致性损失，将重建的几何误差降低50%以上，达到毫米级精度。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">毫米级精度</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">几何正则化</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">伪影减少</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-5">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded mr-2">代表性工作</span>
+                                ArtiFixer (2026.03)
+                            </h4>
+                            <p class="text-gray-600 mb-3">
+                                自回归扩散模型增强3D重建，对遮挡区域的几何和纹理进行智能补全，使复杂场景的完整度提升40%以上。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">遮挡补全</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">扩散增强</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">几何一致性</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-cyan-50 border-l-4 border-cyan-500 p-4 rounded">
+                            <p class="text-sm text-cyan-800">
+                                <strong>核心突破：</strong>
+                                大幅提升了3DGS的几何精度和完整性，使其能够满足工业测量、数字孪生等高精度应用的要求。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. 车规落地 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-pink-500 to-pink-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-pink-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-car text-accent text-2xl"></i>
+                        </div>
+                        <div>
