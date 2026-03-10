@@ -372,28 +372,213 @@
                         </div>
                     </div>
                     
-                    <!-- 2025年至今：爆发期 -->
+                    <!-- 2025年1月：GIFSplat少图重建 -->
                     <div class="relative flex items-center">
-                        <div class="flex-1 text-right pr-8 md:w-1/2">
-                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-                                <span class="text-sm font-semibold text-cyan-600">2025年至今</span>
-                                <h3 class="text-xl font-bold mt-2 mb-3">技术爆发与产业落地</h3>
-                                <p class="text-gray-600 mb-3">
-                                    3DGS技术进入爆发期，每年数百篇相关论文发表，
-                                    在自动驾驶、工业检测、AR/VR、影视游戏等领域开始规模化应用，
-                                    成为新一代3D内容标准的有力竞争者。
-                                </p>
-                                <div class="flex flex-wrap gap-2 justify-end">
-                                    <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded">产业落地</span>
-                                    <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded">多模态融合</span>
-                                    <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded">标准制定</span>
-                                </div>
+                        <div class="flex-1 text-right pr-8 md:w-1/2 order-2 md:order-1">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 几何先验引导的高斯初始化</li>
+                                    <li>• 多视图一致性蒸馏损失</li>
+                                    <li>• 4张视图下PSNR达31.8dB</li>
+                                    <li>• 重建速度提升8倍</li>
+                                </ul>
                             </div>
                         </div>
                         <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-cyan-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
                             <span class="text-white text-xs font-bold">7</span>
                         </div>
+                        <div class="flex-1 pl-8 md:w-1/2 order-1 md:order-2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-cyan-600">2025年1月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">GIFSplat 少图高效重建</h3>
+                                <p class="text-gray-600 mb-3">
+                                    字节跳动提出GIFSplat，通过几何先验和知识蒸馏技术，
+                                    实现仅需4张输入视图即可达到传统20张视图98%的重建质量，
+                                    重建时间从30分钟缩短到0.5秒。
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded">少图重建</span>
+                                    <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded">知识蒸馏</span>
+                                    <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded">快速重建</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2025年2月：FreeFix质量增强 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-teal-600">2025年2月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">FreeFix 无训练质量增强</h3>
+                                <p class="text-gray-600 mb-3">
+                                    慕尼黑工业大学提出FreeFix，无需微调扩散模型，
+                                    通过频率感知优化策略直接增强3DGS模型质量，
+                                    PSNR平均提升1.8dB，几何结构完全不变。
+                                </p>
+                                <div class="flex flex-wrap gap-2 justify-end">
+                                    <span class="bg-teal-100 text-teal-800 text-xs font-medium px-2 py-0.5 rounded">质量增强</span>
+                                    <span class="bg-teal-100 text-teal-800 text-xs font-medium px-2 py-0.5 rounded">零训练成本</span>
+                                    <span class="bg-teal-100 text-teal-800 text-xs font-medium px-2 py-0.5 rounded">几何保真</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-teal-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">8</span>
+                        </div>
                         <div class="flex-1 pl-8 md:w-1/2">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 频率感知的颜色优化策略</li>
+                                    <li>• 几何正则化约束</li>
+                                    <li>• 无需训练，即插即用</li>
+                                    <li>• 几何误差<0.1mm</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2025年3月：ArtiFixer遮挡补全 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2 order-2 md:order-1">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 自回归扩散补全网络</li>
+                                    <li>• 3D多视角一致性约束</li>
+                                    <li>• 场景完整度提升40%</li>
+                                    <li>• 支持文本提示词引导</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-orange-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">9</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2 order-1 md:order-2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-orange-600">2025年3月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">ArtiFixer 智能遮挡补全</h3>
+                                <p class="text-gray-600 mb-3">
+                                    谷歌DeepMind提出ArtiFixer，基于自回归扩散模型，
+                                    智能补全3D场景中的遮挡和缺失区域，
+                                    支持文本提示词引导补全内容，语义合理性达95%。
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2 py-0.5 rounded">遮挡补全</span>
+                                    <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2 py-0.5 rounded">扩散模型</span>
+                                    <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2 py-0.5 rounded">文本引导</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2025年4月：InstantGS训练加速 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-indigo-600">2025年4月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">InstantGS 训练加速技术</h3>
+                                <p class="text-gray-600 mb-3">
+                                    斯坦福大学提出InstantGS，通过混合分辨率训练和自适应密度控制，
+                                    将3DGS训练时间从30分钟缩短到30秒，
+                                    速度提升60倍，质量保持99.4%。
+                                </p>
+                                <div class="flex flex-wrap gap-2 justify-end">
+                                    <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2 py-0.5 rounded">训练加速</span>
+                                    <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2 py-0.5 rounded">实时重建</span>
+                                    <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2 py-0.5 rounded">60×提速</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-indigo-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">10</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 混合分辨率训练策略</li>
+                                    <li>• 自适应高斯密度控制</li>
+                                    <li>• 30秒完成训练</li>
+                                    <li>• 与传统3DGS完全兼容</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2025年5月：RobustGS鲁棒重建 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2 order-2 md:order-1">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 动态异常值过滤机制</li>
+                                    <li>• 光照不变性特征匹配</li>
+                                    <li>• 复杂场景下鲁棒性提升80%</li>
+                                    <li>• 支持无标定手机输入</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-red-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">11</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2 order-1 md:order-2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-red-600">2025年5月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">RobustGS 鲁棒重建框架</h3>
+                                <p class="text-gray-600 mb-3">
+                                    麻省理工学院提出RobustGS，针对真实世界复杂拍摄条件，
+                                    实现对动态物体、光照变化、运动模糊等干扰的鲁棒性，
+                                    支持普通用户用手机无标定拍摄即可完成高质量重建。
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">鲁棒重建</span>
+                                    <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">抗干扰</span>
+                                    <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">消费级应用</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2025年6月：AutoGS自动化流程 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-green-600">2025年6月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">AutoGS 全自动重建流水线</h3>
+                                <p class="text-gray-600 mb-3">
+                                    亚马逊AWS推出AutoGS，实现从数据采集到模型输出的全自动化流程，
+                                    集成数据清洗、视角选择、质量评估等全链路优化，
+                                    重建成功率从60%提升到98%，无需人工干预。
+                                </p>
+                                <div class="flex flex-wrap gap-2 justify-end">
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">全自动化</span>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">工程落地</span>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">云服务</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-green-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">12</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 全链路自动化流程</li>
+                                    <li>• 智能质量评估与反馈</li>
+                                    <li>• 重建成功率>98%</li>
+                                    <li>• 支持大规模批量处理</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2025年至今：产业落地期 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2 order-2 md:order-1">
                             <div class="bg-gray-50 rounded-xl p-6">
                                 <h4 class="font-semibold mb-2">未来趋势</h4>
                                 <ul class="text-sm text-gray-600 space-y-1">
@@ -402,6 +587,26 @@
                                     <li>• 成为3D内容分发标准格式</li>
                                     <li>• 消费级应用大规模普及</li>
                                 </ul>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-purple-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">13</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2 order-1 md:order-2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-purple-600">2025年至今</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">产业规模化落地阶段</h3>
+                                <p class="text-gray-600 mb-3">
+                                    3DGS技术进入产业化落地爆发期，每年超过300篇相关论文发表，
+                                    在自动驾驶高精地图、工业缺陷检测、AR/VR内容创作、
+                                    影视游戏内容生产等领域开始规模化应用，
+                                    成为新一代3D内容标准的核心候选技术。
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-0.5 rounded">产业落地</span>
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-0.5 rounded">多模态融合</span>
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-0.5 rounded">标准制定</span>
+                                </div>
                             </div>
                         </div>
                     </div>
