@@ -81,6 +81,17 @@ php -S localhost:8000
 | ArtiFixer | 遮挡补全+动态支持 | PSNR +2.3dB | 复杂/动态场景 |
 | One-Shot Refiner | 单步精炼，仅10%开销 | LPIPS -30% | 新视角合成/实时应用 |
 
+### 📚 配套文档汇总
+所有技术文档已整理到飞书技能库，持续更新：
+| 文档名称 | 飞书链接 | 内容描述 |
+|---------|----------|----------|
+| 3DGS算法技能库（统一入口） | [🔗 查看](https://www.feishu.cn/docx/TbtgdQceaoqYd4xU1LjcvPevn5b) | 所有技能、规则、文档目录的唯一权威入口 |
+| 2026年1-3月3DGS核心算法汇总 | [🔗 查看](https://www.feishu.cn/docx/Ov7kdxHcJoNAORxMNkPc4l0cnKe) | Q1最新算法汇总，三阶质量提升实现路径 |
+| 稀疏视角与几何精度论文汇总 | [🔗 查看](https://www.feishu.cn/docx/XMUGdTiFkoKtCCxQl4icnhIJnmc) | 23篇核心论文分类整理，技术点解析 |
+| 稀疏视角算法流程设计 | [🔗 查看](https://www.feishu.cn/docx/EXAXduWrKo2lb1x6a1bc0swYnpb) | 完整三阶算法流程，关键代码实现 |
+| 扩散+稀疏+几何论文汇总 | [🔗 查看](https://www.feishu.cn/docx/BJbVd4N4UoDiSoxF009cUqainT8) | 三大核心方向22篇论文，融合路线图 |
+| 技能实现文档 | [🔗 查看](https://www.feishu.cn/docx/Gi0sdIAN2ozq6vxT77bcJ0ZenEg) | 代码架构、使用指南、参数调优 |
+
 ### 包含的教程
 - ✅ 环境安装指南（Conda/PyTorch/3DGS编译）
 - ✅ 数据准备规范
