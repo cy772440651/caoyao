@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>使用教程 - 3DGS + 扩散模型</title>
+    <title>算法实现 - 3DGS技术全景</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/custom.css">
     <script>
         tailwind.config = {
             theme: {
@@ -15,329 +14,431 @@
                         primary: '#3b82f6',
                         secondary: '#8b5cf6',
                         accent: '#ec4899',
-                        dark: '#1e293b',
-                        light: '#f8fafc'
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444',
+                        info: '#06b6d4',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        .code-block .comment { color: #94a3b8; }
+        .code-block .keyword { color: #a855f7; }
+        .code-block .string { color: #f59e0b; }
+        .code-block .function { color: #3b82f6; }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
-    <!-- 导航栏 -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-sm z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <i class="fa fa-cube text-primary text-2xl mr-2"></i>
-                        <span class="font-bold text-xl">3DGS × Diffusion</span>
-                    </div>
-                    <div class="hidden sm:ml-10 sm:flex sm:space-x-8">
-                        <a href="index.html#overview" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
-                            <i class="fa fa-home mr-1"></i> 概览
-                        </a>
-                        <a href="index.html#algorithms" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
-                            <i class="fa fa-code mr-1"></i> 算法实现
-                        </a>
-                        <a href="index.html#performance" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
-                            <i class="fa fa-line-chart mr-1"></i> 性能对比
-                        </a>
-                        <a href="usage.html" class="border-primary text-primary border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
-                            <i class="fa fa-book mr-1"></i> 使用教程
-                        </a>
-                        <a href="insights.html" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">
-                            <i class="fa fa-lightbulb-o mr-1"></i> 研究心得
-                        </a>
-                    </div>
-                </div>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- 统一导航栏 -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center">
+                <i class="fa fa-cube text-primary text-2xl mr-2"></i>
+                <span class="font-bold text-xl">3DGS技术全景</span>
+            </div>
+            <div class="flex space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-gray-900 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-map mr-1"></i> 技术全景
+                </a>
+                <a href="usage.html" class="text-primary border-b-2 border-primary px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-code mr-1"></i> 算法实现
+                </a>
+                <a href="insights.html" class="text-gray-600 hover:text-gray-900 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-line-chart mr-1"></i> 产业落地
+                </a>
+                <a href="demo.html" class="text-gray-600 hover:text-gray-900 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-play-circle mr-1"></i> 算法演示
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://github.com/cy772440651/caoyao" target="_blank" class="text-gray-600 hover:text-gray-900">
+                    <i class="fa fa-github text-lg"></i>
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- 主内容 -->
-    <div class="pt-24 pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">使用教程</h1>
-            <p class="max-w-3xl mx-auto text-gray-600">
-                从环境配置到实际部署，一步步教你如何使用这些算法提升3D重建质量
+    <!-- 头部 -->
+    <header class="pt-24 pb-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-6">算法实现指南</h1>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-8">
+                核心算法的完整实现教程、代码示例和最佳实践，帮助你快速上手3DGS技术栈
             </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                <a href="#freefix" class="bg-white rounded-lg p-4 shadow-sm card-hover text-center">
+                    <i class="fa fa-magic text-primary text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">FreeFix</p>
+                </a>
+                <a href="#gifsplat" class="bg-white rounded-lg p-4 shadow-sm card-hover text-center">
+                    <i class="fa fa-bolt text-purple-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">GIFSplat</p>
+                </a>
+                <a href="#artifixer" class="bg-white rounded-lg p-4 shadow-sm card-hover text-center">
+                    <i class="fa fa-wrench text-pink-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">ArtiFixer</p>
+                </a>
+                <a href="#oneshot" class="bg-white rounded-lg p-4 shadow-sm card-hover text-center">
+                    <i class="fa fa-fast-forward text-green-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">One-Shot Refiner</p>
+                </a>
+            </div>
         </div>
+    </header>
 
-        <!-- 安装指南 -->
+    <!-- 主内容 -->
+    <main class="max-w-5xl mx-auto px-4 py-16">
+        <!-- 环境安装 -->
         <section class="mb-16">
-            <div class="bg-white rounded-xl shadow-md p-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                    <div class="bg-blue-100 p-2 rounded-lg mr-3">
-                        <i class="fa fa-download text-primary"></i>
-                    </div>
-                    环境安装
-                </h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fa fa-cog text-primary mr-3"></i>
+                        环境安装配置
+                    </h2>
 
-                <div class="space-y-6">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">1. 基础依赖安装</h3>
-                        <div class="code-block">
-                            <span class="comment"># 创建conda环境</span><br>
-                            conda create -n 3dgs_diffusion python=3.10<br>
-                            conda activate 3dgs_diffusion<br><br>
-                            <span class="comment"># 安装PyTorch</span><br>
-                            pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118<br><br>
-                            <span class="comment"># 安装3DGS依赖</span><br>
-                            pip install plyfile tqdm numpy scipy Pillow opencv-python<br><br>
-                            <span class="comment"># 安装扩散模型依赖</span><br>
-                            pip install diffusers transformers accelerate xformers<br><br>
-                            <span class="comment"># 安装评估工具</span><br>
-                            pip install torchmetrics[image]
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">基础依赖安装</h3>
+                            <div class="code-block">
+<span class="comment"># 创建conda环境</span><br>
+conda create -n 3dgs_diffusion python=3.10<br>
+conda activate 3dgs_diffusion<br><br>
+<span class="comment"># 安装PyTorch (CUDA 11.8)</span><br>
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118<br><br>
+<span class="comment"># 安装3DGS基础依赖</span><br>
+pip install plyfile tqdm numpy scipy Pillow opencv-python<br><br>
+<span class="comment"># 安装扩散模型依赖</span><br>
+pip install diffusers transformers accelerate xformers<br><br>
+<span class="comment"># 安装评估工具</span><br>
+pip install torchmetrics[image]
+                            </div>
                         </div>
-                    </div>
 
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">2. 编译3DGS CUDA扩展</h3>
-                        <div class="code-block">
-                            git clone https://github.com/graphdeco-inria/gaussian-splatting.git<br>
-                            cd gaussian-splatting<br>
-                            pip install -e .<br><br>
-                            <span class="comment"># 验证安装</span><br>
-                            python -c "import gaussian_renderer; print('3DGS installed successfully!')"
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">编译3DGS CUDA扩展</h3>
+                            <div class="code-block">
+git clone https://github.com/graphdeco-inria/gaussian-splatting.git<br>
+cd gaussian-splatting<br>
+pip install -e .<br><br>
+<span class="comment"># 验证安装</span><br>
+python -c "import gaussian_renderer; print('✅ 3DGS安装成功!')"
+                            </div>
                         </div>
-                    </div>
 
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">3. 下载本项目代码</h3>
-                        <div class="code-block">
-                            git clone https://github.com/your-repo/3dgs-diffusion.git<br>
-                            cd 3dgs-diffusion<br><br>
-                            <span class="comment"># 下载预训练权重（可选）</span><br>
-                            mkdir weights<br>
-                            <span class="comment"># GIFSplat 预训练权重：https://drive.google.com/...</span><br>
-                            <span class="comment"># 放入 weights/gifsplat_pretrained.pth</span>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">数据集准备</h3>
+                            <div class="code-block">
+dataset/<br>
+├── images/               # 输入图像序列<br>
+│   ├── 0001.jpg<br>
+│   ├── 0002.jpg<br>
+│   └── ...<br>
+├── sparse/               # COLMAP输出<br>
+│   └── 0/<br>
+│       ├── cameras.bin<br>
+│       ├── images.bin<br>
+│       └── points3D.bin<br>
+└── input/                # 可选：稀疏视图输入<br>
+    ├── 0001.jpg<br>
+    └── ...
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 快速开始 -->
-        <section class="mb-16">
-            <div class="bg-white rounded-xl shadow-md p-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                    <div class="bg-green-100 p-2 rounded-lg mr-3">
-                        <i class="fa fa-rocket text-green-600"></i>
-                    </div>
-                    快速开始
-                </h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">数据准备</h3>
-                        <p class="text-gray-600 mb-4">你的数据集应该按照如下结构组织：</p>
-                        <div class="code-block text-xs">
-                            dataset/<br>
-                            ├── images/               # 输入图像<br>
-                            │   ├── 0001.jpg<br>
-                            │   ├── 0002.jpg<br>
-                            │   └── ...<br>
-                            ├── sparse/               # COLMAP输出<br>
-                            │   └── 0/<br>
-                            │       ├── cameras.bin<br>
-                            │       ├── images.bin<br>
-                            │       └── points3D.bin<br>
-                            └── input/                # 可选：稀疏视图输入<br>
-                                ├── 0001.jpg<br>
-                                └── ...
+        <!-- FreeFix -->
+        <section id="freefix" class="mb-16">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-magic text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold">FreeFix - 无需微调的扩散增强</h2>
+                            <p class="text-gray-500">无需训练扩散模型，直接增强现有3DGS重建质量，PSNR提升1.8dB</p>
                         </div>
                     </div>
 
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">基础3DGS重建</h3>
-                        <p class="text-gray-600 mb-4">首先用基础3DGS得到初始重建结果：</p>
-                        <div class="code-block">
-                            cd gaussian-splatting<br>
-                            python train.py -s /path/to/your/dataset -m /path/to/output/model<br><br>
-                            <span class="comment"># 训练完成后，模型会保存在/path/to/output/model下</span>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">核心特点</h3>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                <li>无需微调扩散模型，直接使用预训练Stable Diffusion</li>
+                                <li>"渲染-精炼-优化"闭环，保持原始几何结构</li>
+                                <li>低扩散强度(strength=0.3)，避免几何扭曲</li>
+                                <li>适用于所有已训练好的3DGS模型，零成本增强</li>
+                            </ul>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- 各算法使用指南 -->
-        <section class="space-y-8">
-            <!-- FreeFix 使用指南 -->
-            <div class="bg-white rounded-xl shadow-md p-8">
-                <div class="flex items-start">
-                    <div class="bg-blue-100 p-3 rounded-lg mr-4 mt-1">
-                        <i class="fa fa-magic text-primary text-xl"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">FreeFix 使用指南</h3>
-                        <p class="text-gray-600 mb-4">无需微调的扩散增强，直接提升现有3DGS模型质量</p>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">命令行使用</h4>
-                                <div class="code-block">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">使用示例</h3>
+                            <div class="code-block">
+<span class="keyword">from</span> FreeFix <span class="keyword">import</span> FreeFixEnhancer<br>
+<span class="keyword">from</span> scene <span class="keyword">import</span> Scene, GaussianModel<br><br>
+<span class="comment"># 加载预训练3DGS模型</span><br>
+gaussians = GaussianModel(3)<br>
+scene = Scene(dataset, gaussians, load_path=<span class="string">"/path/to/pretrained/model"</span>)<br><br>
+<span class="comment"># 初始化FreeFix增强器</span><br>
+freefix = FreeFixEnhancer()<br><br>
+<span class="comment"># 优化增强</span><br>
+enhanced_gaussians = freefix.optimize_gaussians(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gaussians, scene, dataset, pipe, opt, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;iterations=100<br>)<br><br>
+<span class="comment"># 保存结果</span><br>
+enhanced_gaussians.save_ply(<span class="string">"enhanced_model.ply"</span>)
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">命令行运行</h3>
+                            <div class="code-block">
 python main.py \<br>
 &nbsp;&nbsp;--algorithm freefix \<br>
-&nbsp;&nbsp;--source_path /path/to/your/dataset \<br>
+&nbsp;&nbsp;--source_path /path/to/your/scene \<br>
 &nbsp;&nbsp;--model_path /path/to/pretrained/3dgs/model \<br>
 &nbsp;&nbsp;--output_path output/freefix_result \<br>
 &nbsp;&nbsp;--iterations 100 \<br>
 &nbsp;&nbsp;--evaluate
-                                </div>
                             </div>
-                            
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">Python API 使用</h4>
-                                <div class="code-block">
-<span class="keyword">from</span> FreeFix <span class="keyword">import</span> FreeFixEnhancer<br>
-<span class="keyword">from</span> scene <span class="keyword">import</span> Scene, GaussianModel<br><br>
-<span class="comment"># 加载模型</span><br>
-gaussians = GaussianModel(3)<br>
-scene = Scene(dataset, gaussians, load_path=<span class="string">"/path/to/model"</span>)<br><br>
-<span class="comment"># 增强</span><br>
-freefix = FreeFixEnhancer()<br>
-enhanced_gaussians = freefix.optimize_gaussians(gaussians, scene, dataset, pipe, opt)
-                                </div>
-                            </div>
+                        </div>
 
-                            <div class="alert alert-info">
-                                <i class="fa fa-info-circle mr-2"></i>
-                                <strong>提示：</strong>FreeFix不需要额外的训练数据，只需要已经训练好的3DGS模型即可。
-                            </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                            <p class="text-sm text-blue-800">
+                                <strong>最佳实践：</strong>
+                                对于质量较好的3DGS模型，建议使用较低的扩散强度(0.2-0.3)；对于质量较差的稀疏视图重建，可以适当提高到0.4-0.5。
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- GIFSplat 使用指南 -->
-            <div class="bg-white rounded-xl shadow-md p-8">
-                <div class="flex items-start">
-                    <div class="bg-purple-100 p-3 rounded-lg mr-4 mt-1">
-                        <i class="fa fa-bolt text-secondary text-xl"></i>
+        <!-- GIFSplat -->
+        <section id="gifsplat" class="mb-16">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-bolt text-purple-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold">GIFSplat - 稀疏视图前馈重建</h2>
+                            <p class="text-gray-500">仅需4张输入视图，推理速度比传统3DGS快8倍</p>
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">GIFSplat 使用指南</h3>
-                        <p class="text-gray-600 mb-4">稀疏视图快速重建，仅需4张输入图像</p>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">命令行使用</h4>
-                                <div class="code-block">
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">核心特点</h3>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                <li>前馈网络直接预测3D高斯参数，无需逐场景优化</li>
+                                <li>仅需4张输入视图，达到传统20张视图的重建质量</li>
+                                <li>推理时间仅需0.5秒，实现近乎实时的重建体验</li>
+                                <li>特别适合无人机、手持设备等少视图场景</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">使用示例</h3>
+                            <div class="code-block">
+<span class="keyword">from</span> GIFSplat <span class="keyword">import</span> GIFSplatBackbone, gifsplat_inference<br><br>
+<span class="comment"># 加载4张输入视图和对应相机参数</span><br>
+images = load_input_views(4)<br>
+cameras = load_camera_parameters()<br><br>
+<span class="comment"># 前馈推理得到3DGS模型</span><br>
+gaussians = gifsplat_inference(images, cameras, sh_degree=3)<br><br>
+<span class="comment"># 可选：生成先验引导微调</span><br>
+gaussians = generative_prior_finetune(gaussians, images, cameras)
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">命令行运行</h3>
+                            <div class="code-block">
 python main.py \<br>
 &nbsp;&nbsp;--algorithm gifsplat \<br>
-&nbsp;&nbsp;--source_path /path/to/your/dataset \<br>
+&nbsp;&nbsp;--source_path /path/to/your/scene \<br>
 &nbsp;&nbsp;--model_path /path/to/gifsplat/weights \<br>
 &nbsp;&nbsp;--num_views 4 \<br>
 &nbsp;&nbsp;--output_path output/gifsplat_result
-                                </div>
                             </div>
-                            
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">输入要求</h4>
-                                <ul class="list-disc pl-5 text-gray-600 space-y-1">
-                                    <li>至少4张带有相机参数的输入图像</li>
-                                    <li>图像之间需要有足够的视差重叠</li>
-                                    <li>推荐使用COLMAP提前估计相机参数</li>
-                                </ul>
-                            </div>
+                        </div>
 
-                            <div class="alert alert-warning">
-                                <i class="fa fa-exclamation-triangle mr-2"></i>
-                                <strong>注意：</strong>GIFSplat的前馈模型需要下载预训练权重才能使用。
-                            </div>
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
+                            <p class="text-sm text-purple-800">
+                                <strong>注意：</strong>
+                                预训练权重需要单独下载，支持通用场景、户外、室内等不同领域的专用模型。
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- ArtiFixer 使用指南 -->
-            <div class="bg-white rounded-xl shadow-md p-8">
-                <div class="flex items-start">
-                    <div class="bg-pink-100 p-3 rounded-lg mr-4 mt-1">
-                        <i class="fa fa-wrench text-accent text-xl"></i>
+        <!-- ArtiFixer -->
+        <section id="artifixer" class="mb-16">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-pink-500 to-pink-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-pink-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-wrench text-pink-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold">ArtiFixer - 遮挡区域补全</h2>
+                            <p class="text-gray-500">自回归扩散模型补全遮挡区域，支持动态场景重建</p>
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">ArtiFixer 使用指南</h3>
-                        <p class="text-gray-600 mb-4">遮挡区域补全，支持动态场景重建</p>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">命令行使用</h4>
-                                <div class="code-block">
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">核心特点</h3>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                <li>自回归扩散模型同时补全几何和纹理信息</li>
+                                <li>遮挡区域重建精度提升40%以上</li>
+                                <li>支持动态场景和非刚性物体的4D重建</li>
+                                <li>多视图一致性约束，避免补全结果冲突</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">使用示例</h3>
+                            <div class="code-block">
+<span class="keyword">from</span> ArtiFixer <span class="keyword">import</span> ArtiFixer3D<br><br>
+<span class="comment"># 初始化ArtiFixer</span><br>
+artifixer = ArtiFixer3D()<br><br>
+<span class="comment"># 补全遮挡区域</span><br>
+enhanced_gaussians = artifixer.complete_occluded_regions(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gaussians, scene, cameras, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;prompt=<span class="string">"photorealistic indoor scene, complete missing furniture"</span><br>)<br><br>
+<span class="comment"># 动态场景时序重建</span><br>
+dynamic_gaussians = artifixer.reconstruct_dynamic_scene(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;image_sequence, camera_sequence<br>)
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">命令行运行</h3>
+                            <div class="code-block">
 python main.py \<br>
 &nbsp;&nbsp;--algorithm artifixer \<br>
-&nbsp;&nbsp;--source_path /path/to/your/dataset \<br>
+&nbsp;&nbsp;--source_path /path/to/your/scene \<br>
 &nbsp;&nbsp;--model_path /path/to/initial/3dgs/model \<br>
 &nbsp;&nbsp;--prompt <span class="string">"photorealistic indoor scene, complete missing furniture"</span> \<br>
 &nbsp;&nbsp;--output_path output/artifixer_result
-                                </div>
                             </div>
-                            
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">提示词工程技巧</h4>
-                                <ul class="list-disc pl-5 text-gray-600 space-y-1">
-                                    <li>包含场景类型："indoor office", "outdoor city street", "natural landscape"</li>
-                                    <li>描述期望的内容："complete missing walls", "fill in occluded furniture"</li>
-                                    <li>添加风格描述："photorealistic", "high detail", "consistent lighting"</li>
-                                </ul>
-                            </div>
+                        </div>
 
-                            <div class="alert alert-success">
-                                <i class="fa fa-lightbulb-o mr-2"></i>
-                                <strong>技巧：</strong>对于动态场景，可以传入时序图像序列，ArtiFixer会自动进行时序一致性补全。
-                            </div>
+                        <div class="bg-pink-50 border-l-4 border-pink-500 p-4 rounded">
+                            <p class="text-sm text-pink-800">
+                                <strong>提示词工程技巧：</strong>
+                                补全提示词需要包含场景类型、期望内容、风格描述，例如："photorealistic office scene, fill in missing desks and chairs, consistent lighting"。
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- One-Shot Refiner 使用指南 -->
-            <div class="bg-white rounded-xl shadow-md p-8">
-                <div class="flex items-start">
-                    <div class="bg-green-100 p-3 rounded-lg mr-4 mt-1">
-                        <i class="fa fa-fast-forward text-green-600 text-xl"></i>
+        <!-- One-Shot Refiner -->
+        <section id="oneshot" class="mb-16">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-green-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-fast-forward text-green-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold">One-Shot Refiner - 单步扩散精炼</h2>
+                            <p class="text-gray-500">仅需一步扩散提升新视角合成质量，速度仅增加10%</p>
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">One-Shot Refiner 使用指南</h3>
-                        <p class="text-gray-600 mb-4">单步扩散精炼，提升新视角合成质量</p>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">命令行使用</h4>
-                                <div class="code-block">
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">核心特点</h3>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                <li>仅需一步扩散即可提升新视角合成质量，LPIPS降低30%</li>
+                                <li>3D一致性损失保持几何结构不变，避免多视角冲突</li>
+                                <li>推理速度仅增加10%，适合实时应用场景</li>
+                                <li>轻量化版本可在移动端实时运行</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">使用示例</h3>
+                            <div class="code-block">
+<span class="keyword">from</span> OneShotRefiner <span class="keyword">import</span> OneShotRefiner, LightweightOneShotRefiner<br><br>
+<span class="comment"># 初始化精炼器</span><br>
+refiner = OneShotRefiner()<br><br>
+<span class="comment"># 单步精炼渲染结果</span><br>
+rendered_image = render(camera, gaussians)<br>
+refined_image = refiner.refine_novel_view(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rendered_image, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;prompt=<span class="string">"photorealistic, high detail, 8k"</span><br>)<br><br>
+<span class="comment"># 轻量化版本（实时应用）</span><br>
+light_refiner = LightweightOneShotRefiner()<br>
+refined_image = light_refiner.quick_refine(rendered_image)
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">命令行运行</h3>
+                            <div class="code-block">
 python main.py \<br>
 &nbsp;&nbsp;--algorithm oneshot \<br>
-&nbsp;&nbsp;--source_path /path/to/your/dataset \<br>
+&nbsp;&nbsp;--source_path /path/to/your/scene \<br>
 &nbsp;&nbsp;--model_path /path/to/3dgs/model \<br>
 &nbsp;&nbsp;--prompt <span class="string">"photorealistic, high detail, 8k"</span> \<br>
 &nbsp;&nbsp;--output_path output/oneshot_result \<br>
 &nbsp;&nbsp;--evaluate
-                                </div>
                             </div>
-                            
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-2">实时推理示例</h4>
-                                <div class="code-block">
-<span class="keyword">from</span> OneShotRefiner <span class="keyword">import</span> LightweightOneShotRefiner<br><br>
-<span class="comment"># 初始化轻量化版本</span><br>
-refiner = LightweightOneShotRefiner()<br><br>
-<span class="comment"># 实时渲染流水线</span><br>
-<span class="keyword">while</span> True:<br>
-&nbsp;&nbsp;<span class="comment"># 3DGS渲染</span><br>
-&nbsp;&nbsp;rendered_image = render(camera, gaussians)<br>
-&nbsp;&nbsp;<span class="comment"># 单步精炼（仅增加10%耗时）</span><br>
-&nbsp;&nbsp;refined_image = refiner.quick_refine(rendered_image)<br>
-&nbsp;&nbsp;<span class="comment"># 显示结果</span><br>
-&nbsp;&nbsp;display(refined_image)
-                                </div>
-                            </div>
+                        </div>
 
-                            <div class="alert alert-info">
-                                <i class="fa fa-info-circle mr-2"></i>
-                                <strong>提示：</strong>One-Shot Refiner特别适合实时应用，如AR/VR场景的实时渲染增强。
-                            </div>
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                            <p class="text-sm text-green-800">
+                                <strong>最佳实践：</strong>
+                                对于实时AR/VR应用，建议使用轻量化版本，虽然质量略有下降，但可以在手机端实现30+FPS的实时渲染增强。
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -345,85 +446,87 @@ refiner = LightweightOneShotRefiner()<br><br>
         </section>
 
         <!-- 常见问题 -->
-        <section class="mt-16">
-            <div class="bg-white rounded-xl shadow-md p-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                    <div class="bg-yellow-100 p-2 rounded-lg mr-3">
-                        <i class="fa fa-question-circle text-yellow-600"></i>
-                    </div>
-                    常见问题
-                </h2>
+        <section>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-yellow-500 to-yellow-600"></div>
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fa fa-question-circle text-yellow-600 mr-3"></i>
+                        常见问题解答
+                    </h2>
 
-                <div class="space-y-6">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Q: 显存不足怎么办？</h3>
-                        <p class="text-gray-600">
-                            A: 可以尝试以下方法：1) 减小图像分辨率；2) 减少扩散步数；3) 启用VAE切片和xformers内存优化；
-                            4) 使用更小的扩散模型，如Stable Diffusion v1.5代替v2.1。
-                        </p>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Q: 如何选择合适的算法？</h3>
-                        <p class="text-gray-600">
-                            A: 如果已经有训练好的3DGS模型，优先用FreeFix；如果是稀疏视图输入，选GIFSplat；
-                            如果场景有大面积遮挡，选ArtiFixer；如果需要实时应用，选One-Shot Refiner。
-                        </p>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Q: 扩散模型生成的内容与实际场景不一致怎么办？</h3>
-                        <p class="text-gray-600">
-                            A: 可以降低扩散的strength参数（默认0.3，可调低到0.1-0.2），或者增加3D一致性损失的权重，
-                            也可以提供更精确的文本提示词引导生成方向。
-                        </p>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Q: 支持动态场景重建吗？</h3>
-                        <p class="text-gray-600">
-                            A: 是的，ArtiFixer支持动态场景和非刚性物体的时序重建，可以输入时序图像序列，
-                            算法会自动保持时序一致性，适合人体、动物等动态对象的4D重建。
-                        </p>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Q: 显存不足怎么办？</h3>
+                            <p class="text-gray-600">
+                                A: 可以尝试以下优化：1) 减小图像分辨率；2) 减少扩散步数到20-50步；3) 启用VAE切片和xformers内存优化；
+                                4) 使用更小的扩散模型，如Stable Diffusion v1.5代替v2.1；5) 减小batch size。
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Q: 扩散模型生成的内容与实际场景不一致怎么办？</h3>
+                            <p class="text-gray-600">
+                                A: 可以降低扩散的strength参数（默认0.3，可调低到0.1-0.2），或者增加3D一致性损失的权重，
+                                也可以提供更精确的文本提示词引导生成方向。
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Q: 如何选择合适的算法？</h3>
+                            <p class="text-gray-600">
+                                A: 如果已经有训练好的3DGS模型，优先用FreeFix；如果是稀疏视图输入，选GIFSplat；
+                                如果场景有大面积遮挡，选ArtiFixer；如果需要实时应用，选One-Shot Refiner。
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Q: 支持动态场景重建吗？</h3>
+                            <p class="text-gray-600">
+                                A: 是的，ArtiFixer支持动态场景和非刚性物体的时序重建，可以输入时序图像序列，
+                                算法会自动保持时序一致性，适合人体、动物等动态对象的4D重建。
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-    </div>
+    </main>
 
-    <!-- 页脚 -->
+    <!-- 统一页脚 -->
     <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <div class="flex items-center mb-4">
                         <i class="fa fa-cube text-primary text-2xl mr-2"></i>
-                        <span class="font-bold text-xl">3DGS × Diffusion</span>
+                        <span class="font-bold text-xl">3DGS技术全景</span>
                     </div>
                     <p class="text-gray-400">
-                        3D高斯泼溅与扩散模型的前沿融合，实现高质量、高效率的3D重建。
+                        整理了2025-2026年3D高斯泼溅技术的最新突破和产业应用，帮助开发者和从业者快速掌握前沿动态。
                     </p>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+                    <h3 class="text-lg font-semibold mb-4">快速导航</h3>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="index.html#algorithms" class="hover:text-white transition-colors">算法介绍</a></li>
-                        <li><a href="index.html#performance" class="hover:text-white transition-colors">性能对比</a></li>
-                        <li><a href="usage.html" class="hover:text-white transition-colors">使用教程</a></li>
-                        <li><a href="insights.html" class="hover:text-white transition-colors">研究心得</a></li>
+                        <li><a href="index.html" class="hover:text-white transition-colors">技术全景</a></li>
+                        <li><a href="usage.html" class="hover:text-white transition-colors">算法实现</a></li>
+                        <li><a href="insights.html" class="hover:text-white transition-colors">产业落地</a></li>
+                        <li><a href="https://github.com/graphdeco-inria/gaussian-splatting" target="_blank" class="hover:text-white transition-colors">官方3DGS代码</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">资源</h3>
+                    <h3 class="text-lg font-semibold mb-4">资源推荐</h3>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="https://github.com/graphdeco-inria/gaussian-splatting" target="_blank" class="hover:text-white transition-colors">3DGS官方代码</a></li>
-                        <li><a href="https://arxiv.org/search/?query=3D Gaussian Splatting diffusion" target="_blank" class="hover:text-white transition-colors">相关论文</a></li>
-                        <li><a href="https://huggingface.co/runwayml/stable-diffusion-v1-5" target="_blank" class="hover:text-white transition-colors">Stable Diffusion</a></li>
+                        <li><a href="https://arxiv.org/search/?query=3D Gaussian Splatting" target="_blank" class="hover:text-white transition-colors">最新论文</a></li>
+                        <li><a href="https://www.youtube.com/results?search_query=3D Gaussian Splatting" target="_blank" class="hover:text-white transition-colors">视频教程</a></li>
+                        <li><a href="https://discord.gg/gaussian-splatting" target="_blank" class="hover:text-white transition-colors">社区讨论</a></li>
+                        <li><a href="https://github.com/cy772440651/caoyao" target="_blank" class="hover:text-white transition-colors">本网站源码</a></li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
-                <p>© 2024 3DGS + Diffusion 学习项目. 基于最新研究成果实现.</p>
+                <p>© 2026 3DGS技术全景 | 基于最新研究成果整理</p>
             </div>
         </div>
     </footer>

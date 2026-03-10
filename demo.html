@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算法演示 - 3DGS技术全景</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#8b5cf6',
+                        accent: '#ec4899',
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444',
+                        info: '#06b6d4',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        .demo-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .demo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .comparison-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+        .comparison-slider .before,
+        .comparison-slider .after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .comparison-slider .before {
+            z-index: 1;
+            width: 50%;
+            border-right: 3px solid white;
+        }
+        .comparison-slider:hover .slider-handle {
+            opacity: 1;
+        }
+        .slider-handle {
+            position: absolute;
+            z-index: 3;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 0 6px rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            cursor: ew-resize;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .code-tabs .tab-content {
+            display: none;
+        }
+        .code-tabs .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- 统一导航栏 -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center">
+                <i class="fa fa-cube text-primary text-2xl mr-2"></i>
+                <span class="font-bold text-xl">3DGS技术全景</span>
+            </div>
+            <div class="flex space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-gray-900 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-map mr-1"></i> 技术全景
+                </a>
+                <a href="usage.html" class="text-gray-600 hover:text-gray-900 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-code mr-1"></i> 算法实现
+                </a>
+                <a href="insights.html" class="text-gray-600 hover:text-gray-900 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-line-chart mr-1"></i> 产业落地
+                </a>
+                <a href="demo.html" class="text-primary border-b-2 border-primary px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-play-circle mr-1"></i> 算法演示
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://github.com/cy772440651/caoyao" target="_blank" class="text-gray-600 hover:text-gray-900">
+                    <i class="fa fa-github text-lg"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部 -->
+    <header class="pt-24 pb-16 bg-gradient-to-r from-blue-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-6">核心算法交互式演示</h1>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-8">
+                直观感受少图重建、质量增强、动态重建等核心算法的效果对比和性能指标
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#gifsplat-demo" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                    <i class="fa fa-bolt mr-2"></i>GIFSplat 少图重建
+                </a>
+                <a href="#freefix-demo" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                    <i class="fa fa-magic mr-2"></i>FreeFix 质量增强
+                </a>
+                <a href="#artifixer-demo" class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                    <i class="fa fa-wrench mr-2"></i>ArtiFixer 遮挡补全
+                </a>
+                <a href="#instantgs-demo" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                    <i class="fa fa-fast-forward mr-2"></i>InstantGS 训练加速
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="max-w-7xl mx-auto px-4 py-16">
+        <!-- GIFSplat 演示 -->
+        <section id="gifsplat-demo" class="mb-20">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-bolt text-purple-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold">GIFSplat - 少图重建演示</h2>
+                            <p class="text-gray-500">仅需4张输入视图，0.5秒完成重建，达到传统20张视图的98%质量</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">效果对比</h3>
+                            <div class="comparison-slider h-[400px] bg-gray-100">
+                                <div class="before flex items-center justify-center">
+                                    <div class="text-center">
+                                        <i class="fa fa-camera text-4xl text-gray-400 mb-2"></i>
+                                        <p class="text-gray-500">传统3DGS (20张图)</p>
+                                        <p class="text-sm text-gray-400 mt-2">PSNR: 32.5dB</p>
+                                    </div>
+                                </div>
+                                <div class="after flex items-center justify-center">
+                                    <div class="text-center">
+                                        <i class="fa fa-bolt text-4xl text-purple-400 mb-2"></i>
+                                        <p class="text-gray-500">GIFSplat (4张图)</p>
+                                        <p class="text-sm text-gray-400 mt-2">PSNR: 31.8dB</p>
+                                    </div>
+                                </div>
+                                <div class="slider-handle">
+                                    <i class="fa fa-arrows-h text-gray-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3 text-center">拖动滑块对比效果：左侧传统3DGS需要20张图，右侧GIFSplat仅需4张图</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">核心特性</h3>
+                            <div class="feature-grid">
+                                <div class="bg-purple-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-purple-600 mb-1">4张</div>
+                                    <div class="text-sm text-gray-600">最少输入</div>
+                                </div>
+                                <div class="bg-purple-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-purple-600 mb-1">0.5s</div>
+                                    <div class="text-sm text-gray-600">重建时间</div>
+                                </div>
+                                <div class="bg-purple-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-purple-600 mb-1">8×</div>
+                                    <div class="text-sm text-gray-600">速度提升</div>
+                                </div>
+                                <div class="bg-purple-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-purple-600 mb-1">98%</div>
+                                    <div class="text-sm text-gray-600">质量相当</div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-8 mb-4">性能对比</h3>
+                            <canvas id="gifsplatChart" height="220"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold mb-4">使用代码</h3>
+                        <div class="code-tabs">
+                            <div class="flex border-b border-gray-200 mb-4">
+                                <button class="tab-btn px-4 py-2 font-medium text-primary border-b-2 border-primary" data-tab="python-gif">Python API</button>
+                                <button class="tab-btn px-4 py-2 font-medium text-gray-500 hover:text-gray-700" data-tab="cli-gif">命令行</button>
+                            </div>
+                            <div id="python-gif" class="tab-content active">
+                                <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm">
+<span class="text-purple-400">from</span> 3dgs_skill <span class="text-purple-400">import</span> reconstruct, save_model
+
+<span class="text-gray-400"># 仅需4张视图完成重建</span>
+model = reconstruct(
+    input_path=<span class="text-green-400">"./data/scene"</span>,
+    algorithm=<span class="text-green-400">"gifsplat"</span>,
+    num_views=<span class="text-blue-400">4</span>,
+    device=<span class="text-green-400">"cuda"</span>
+)
+
+<span class="text-gray-400"># 保存结果</span>
+save_model(model, <span class="text-green-400">"./output/gifsplat_model.ply"</span>)
+                                </pre>
+                            </div>
+                            <div id="cli-gif" class="tab-content">
+                                <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm">
+<span class="text-gray-400"># 命令行运行GIFSplat重建</span>
+3dgs reconstruct \
+    --input ./data/scene \
+    --algorithm gifsplat \
+    --num-views 4 \
+    --output ./output/gifsplat_model.ply
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
+                        <p class="text-sm text-purple-800">
+                            <strong>适用场景：</strong>
+                            移动端AR扫描、无人机快速建图、电商商品3D展示、快速原型设计等需要快速重建的场景。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FreeFix 演示 -->
+        <section id="freefix-demo" class="mb-20">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-magic text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold">FreeFix - 质量增强演示</h2>
+                            <p class="text-gray-500">无需微调扩散模型，直接增强3DGS质量，PSNR提升1.8dB，几何不变</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">效果对比</h3>
+                            <div class="comparison-slider h-[400px] bg-gray-100">
+                                <div class="before flex items-center justify-center">
+                                    <div class="text-center">
+                                        <i class="fa fa-image text-4xl text-gray-400 mb-2"></i>
+                                        <p class="text-gray-500">增强前</p>
+                                        <p class="text-sm text-gray-400 mt-2">PSNR: 30.0dB</p>
+                                    </div>
+                                </div>
+                                <div class="after flex items-center justify-center">
+                                    <div class="text-center">
+                                        <i class="fa fa-magic text-4xl text-blue-400 mb-2"></i>
+                                        <p class="text-gray-500">FreeFix增强后</p>
+                                        <p class="text-sm text-gray-400 mt-2">PSNR: 31.8dB</p>
+                                    </div>
+                                </div>
+                                <div class="slider-handle">
+                                    <i class="fa fa-arrows-h text-gray-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3 text-center">拖动滑块对比：左侧原始低质量模型，右侧FreeFix增强后，几何结构完全不变</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">核心特性</h3>
+                            <div class="feature-grid">
+                                <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-blue-600 mb-1">+1.8dB</div>
+                                    <div class="text-sm text-gray-600">PSNR提升</div>
+                                </div>
+                                <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-blue-600 mb-1">0</div>
+                                    <div class="text-sm text-gray-600">训练成本</div>
+                                </div>
+                                <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-blue-600 mb-1">&lt;0.1mm</div>
+                                    <div class="text-sm text-gray-600">几何误差</div>
+                                </div>
+                                <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-blue-600 mb-1">100%</div>
+                                    <div class="text-sm text-gray-600">适用性</div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-8 mb-4">质量提升对比</h3>
+                            <canvas id="freefixChart" height="220"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold mb-4">使用代码</h3>
+                        <div class="code-tabs">
+                            <div class="flex border-b border-gray-200 mb-4">
+                                <button class="tab-btn px-4 py-2 font-medium text-primary border-b-2 border-primary" data-tab="python-free">Python API</button>
+                                <button class="tab-btn px-4 py-2 font-medium text-gray-500 hover:text-gray-700" data-tab="cli-free">命令行</button>
+                            </div>
+                            <div id="python-free" class="tab-content active">
+                                <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm">
+<span class="text-purple-400">from</span> 3dgs_skill <span class="text-purple-400">import</span> enhance, load_model
+
+<span class="text-gray-400"># 加载原始模型</span>
+model = load_model(<span class="text-green-400">"./raw_model.ply"</span>)
+
+<span class="text-gray-400"># FreeFix增强</span>
+enhanced_model = enhance(
+    model=model,
+    algorithm=<span class="text-green-400">"freefix"</span>,
+    scene_path=<span class="text-green-400">"./data/scene"</span>,
+    strength=<span class="text-blue-400">0.3</span>,
+    iterations=<span class="text-blue-400">100</span>
+)
+                                </pre>
+                            </div>
+                            <div id="cli-free" class="tab-content">
+                                <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm">
+<span class="text-gray-400"># 命令行运行FreeFix增强</span>
+3dgs enhance \
+    --model ./raw_model.ply \
+    --algorithm freefix \
+    --scene ./data/scene \
+    --strength 0.3 \
+    --output ./enhanced_model.ply
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <p class="text-sm text-blue-800">
+                            <strong>最佳实践：</strong>
+                            对于少图重建结果，使用strength=0.4，迭代200次；对于高质量模型，使用strength=0.1-0.2，迭代50次即可获得明显提升。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ArtiFixer 演示 -->
+        <section id="artifixer-demo" class="mb-20">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-pink-500 to-pink-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-pink-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-wrench text-pink-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold">ArtiFixer - 遮挡补全演示</h2>
+                            <p class="text-gray-500">自回归扩散模型智能补全遮挡区域，场景完整度提升40%</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">效果对比</h3>
+                            <div class="comparison-slider h-[400px] bg-gray-100">
+                                <div class="before flex items-center justify-center">
+                                    <div class="text-center">
+                                        <i class="fa fa-ban text-4xl text-gray-400 mb-2"></i>
+                                        <p class="text-gray-500">补全前（有遮挡）</p>
+                                        <p class="text-sm text-gray-400 mt-2">完整度: 60%</p>
+                                    </div>
+                                </div>
+                                <div class="after flex items-center justify-center">
+                                    <div class="text-center">
+                                        <i class="fa fa-check-circle text-4xl text-pink-400 mb-2"></i>
+                                        <p class="text-gray-500">ArtiFixer补全后</p>
+                                        <p class="text-sm text-gray-400 mt-2">完整度: 95%</p>
+                                    </div>
+                                </div>
+                                <div class="slider-handle">
+                                    <i class="fa fa-arrows-h text-gray-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3 text-center">拖动滑块对比：左侧原始模型有大面积遮挡，右侧ArtiFixer智能补全缺失部分</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">核心特性</h3>
+                            <div class="feature-grid">
+                                <div class="bg-pink-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-pink-600 mb-1">+40%</div>
+                                    <div class="text-sm text-gray-600">完整度提升</div>
+                                </div>
+                                <div class="bg-pink-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-pink-600 mb-1">95%</div>
+                                    <div class="text-sm text-gray-600">语义合理性</div>
+                                </div>
+                                <div class="bg-pink-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-pink-600 mb-1">90%</div>
+                                    <div class="text-sm text-gray-600">几何一致性</div>
+                                </div>
+                                <div class="bg-pink-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-pink-600 mb-1">3D</div>
+                                    <div class="text-sm text-gray-600">多视角一致</div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-8 mb-4">不同遮挡比例效果</h3>
+                            <canvas id="artifixerChart" height="220"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold mb-4">使用代码</h3>
+                        <div class="code-tabs">
+                            <div class="flex border-b border-gray-200 mb-4">
+                                <button class="tab-btn px-4 py-2 font-medium text-primary border-b-2 border-primary" data-tab="python-arti">Python API</button>
+                                <button class="tab-btn px-4 py-2 font-medium text-gray-500 hover:text-gray-700" data-tab="cli-arti">命令行</button>
+                            </div>
+                            <div id="python-arti" class="tab-content active">
+                                <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm">
+<span class="text-purple-400">from</span> 3dgs_skill <span class="text-purple-400">import</span> enhance
+
+<span class="text-gray-400"># 遮挡补全，支持文本提示词引导</span>
+completed_model = enhance(
+    model=<span class="text-green-400">"./incomplete_model.ply"</span>,
+    algorithm=<span class="text-green-400">"artifixer"</span>,
+    prompt=<span class="text-green-400">"photorealistic office scene, complete missing desks and chairs"</span>,
+    consistency_weight=<span class="text-blue-400">0.8</span>
+)
+                                </pre>
+                            </div>
+                            <div id="cli-arti" class="tab-content">
+                                <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm">
+<span class="text-gray-400"># 命令行运行ArtiFixer补全</span>
+3dgs enhance \
+    --model ./incomplete_model.ply \
+    --algorithm artifixer \
+    --prompt "photorealistic office scene, complete missing desks and chairs" \
+    --output ./completed_model.ply
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-pink-50 border-l-4 border-pink-500 p-4 rounded">
+                        <p class="text-sm text-pink-800">
+                            <strong>提示词技巧：</strong>
+                            提示词需要包含场景类型、期望补全的内容、风格要求，例如"photorealistic building facade, complete missing windows, consistent architectural style"。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- InstantGS 演示 -->
+        <section id="instantgs-demo">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-green-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-fast-forward text-green-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold">InstantGS - 训练加速演示</h2>
+                            <p class="text-gray-500">30秒完成训练，比传统3DGS快60倍，质量几乎无损</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">速度对比</h3>
+                            <div class="bg-gray-50 rounded-lg p-6">
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm font-medium text-gray-700">传统3DGS</span>
+                                            <span class="text-sm font-medium text-gray-700">30分钟</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-4">
+                                            <div class="bg-gray-500 h-4 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm font-medium text-gray-700">InstantGS</span>
+                                            <span class="text-sm font-medium text-gray-700">30秒</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-4">
+                                            <div class="bg-green-500 h-4 rounded-full" style="width: 1.7%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-6 text-center">
+                                    <div class="text-4xl font-bold text-green-600 mb-2">60×</div>
+                                    <p class="text-gray-600">训练速度提升</p>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-8 mb-4">质量对比</h3>
+                            <div class="comparison-slider h-[200px] bg-gray-100">
+                                <div class="before flex items-center justify-center">
+                                    <div class="text-center">
+                                        <p class="text-gray-500">传统3DGS (30分钟)</p>
+                                        <p class="text-sm text-gray-400 mt-1">PSNR: 32.5dB</p>
+                                    </div>
+                                </div>
+                                <div class="after flex items-center justify-center">
+                                    <div class="text-center">
+                                        <p class="text-gray-500">InstantGS (30秒)</p>
+                                        <p class="text-sm text-gray-400 mt-1">PSNR: 32.3dB</p>
+                                    </div>
+                                </div>
+                                <div class="slider-handle">
+                                    <i class="fa fa-arrows-h text-gray-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3 text-center">质量几乎相同，速度提升60倍</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">核心特性</h3>
+                            <div class="feature-grid">
+                                <div class="bg-green-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-green-600 mb-1">30s</div>
+                                    <div class="text-sm text-gray-600">训练时间</div>
+                                </div>
+                                <div class="bg-green-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-green-600 mb-1">60×</div>
+                                    <div class="text-sm text-gray-600">速度提升</div>
+                                </div>
+                                <div class="bg-green-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-green-600 mb-1">99.4%</div>
+                                    <div class="text-sm text-gray-600">质量保持</div>
+                                </div>
+                                <div class="bg-green-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-green-600 mb-1">✓</div>
+                                    <div class="text-sm text-gray-600">完全兼容</div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-8 mb-4">训练时间对比</h3>
+                            <canvas id="instantgsChart" height="220"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold mb-4">使用代码</h3>
+                        <div class="code-tabs">
+                            <div class="flex border-b border-gray-200 mb-4">
+                                <button class="tab-btn px-4 py-2 font-medium text-primary border-b-2 border-primary" data-tab="python-inst
