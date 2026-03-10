@@ -166,7 +166,251 @@
         <!-- 发展时间线 -->
         <section class="mb-20">
             <h2 class="text-3xl font-bold text-center mb-12">发展时间线</h2>
-            <div class="relative timeline max-w-3xl mx-auto pl-10">
+            
+            <div class="relative">
+                <!-- 时间线中心线 -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500"></div>
+                
+                <!-- 时间线节点 -->
+                <div class="space-y-16">
+                    <!-- 2023年8月：3DGS基础论文 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-blue-600">2023年8月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">3D Gaussian Splatting 基础论文</h3>
+                                <p class="text-gray-600 mb-3">
+                                    Inria团队首次提出3D高斯泼溅技术，使用数百万个各向异性高斯球表示3D场景，
+                                    实现了高质量实时渲染，突破了NeRF类方法的速度瓶颈。
+                                </p>
+                                <div class="flex flex-wrap gap-2 justify-end">
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">基础框架</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">实时渲染</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">静态场景</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-blue-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">1</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 3D高斯表示方法，兼顾质量与效率</li>
+                                    <li>• 可微的前向渲染管线</li>
+                                    <li>• 自适应高斯密度控制策略</li>
+                                    <li>• 1080p分辨率下实时渲染（>100fps）</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2023年12月：动态4DGS -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2 order-2 md:order-1">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 高斯变形场建模动态物体运动</li>
+                                    <li>• 时空一致性正则化</li>
+                                    <li>• 支持动态场景实时渲染</li>
+                                    <li>• 人物动态重建效果超越NeRF</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-purple-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">2</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2 order-1 md:order-2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-purple-600">2023年12月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">4D Gaussian Splatting 动态场景</h3>
+                                <p class="text-gray-600 mb-3">
+                                    斯坦福大学提出4DGS，将3DGS扩展到动态场景，实现了动态物体的高质量重建和实时渲染，
+                                    解决了传统方法在动态场景下的模糊和时序不一致问题。
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-0.5 rounded">动态场景</span>
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-0.5 rounded">4D重建</span>
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-0.5 rounded">人物运动</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2024年3月：SparseGS稀疏视角 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-green-600">2024年3月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">SparseGS 稀疏视角重建</h3>
+                                <p class="text-gray-600 mb-3">
+                                    清华大学提出SparseGS，通过几何正则化和多视图一致性约束，
+                                    将3DGS所需的输入视图数量从数十张降低到3-5张，大幅降低了采集成本。
+                                </p>
+                                <div class="flex flex-wrap gap-2 justify-end">
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">稀疏视角</span>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">低采集成本</span>
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">几何正则化</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-green-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">3</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 深度一致性正则化约束</li>
+                                    <li>• 自适应高斯初始化策略</li>
+                                    <li>• 3张视图下PSNR提升3-5dB</li>
+                                    <li>• 支持手机端快速采集</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2024年6月：CityGS大场景 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2 order-2 md:order-1">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 层次化场景划分与LOD策略</li>
+                                    <li>• 分布式训练与渲染框架</li>
+                                    <li>• 城市级场景实时渲染</li>
+                                    <li>• 显存占用降低80%</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-yellow-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">4</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2 order-1 md:order-2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-yellow-600">2024年6月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">CityGS 城市级大场景重建</h3>
+                                <p class="text-gray-600 mb-3">
+                                    英伟达研究院提出CityGS，实现了城市级大规模场景的3DGS重建，
+                                    支持平方公里级场景的实时渲染，突破了3DGS在大场景下的显存和性能限制。
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">城市级场景</span>
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">层次化LOD</span>
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">分布式渲染</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2024年9月：MobileGS端侧 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-red-600">2024年9月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">MobileGS 端侧实时渲染</h3>
+                                <p class="text-gray-600 mb-3">
+                                    谷歌提出MobileGS，通过模型量化、算子优化和硬件加速，
+                                    首次在iPhone 15上实现了3DGS的实时渲染（>30fps），
+                                    为移动端AR应用铺平了道路。
+                                </p>
+                                <div class="flex flex-wrap gap-2 justify-end">
+                                    <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">端侧部署</span>
+                                    <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">模型量化</span>
+                                    <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded">移动端AR</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-red-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">5</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 16/8位混合精度量化</li>
+                                    <li>• GPU渲染管线深度优化</li>
+                                    <li>• 移动端实时渲染>30fps</li>
+                                    <li>• 功耗降低60%</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2025年3月：DreamGaussian生成式 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2 order-2 md:order-1">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">核心贡献</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 扩散先验补充缺失信息</li>
+                                    <li>• 多视角一致性生成策略</li>
+                                    <li>• 单视图重建质量提升10dB+</li>
+                                    <li>• 支持语义驱动的场景编辑</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">6</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2 order-1 md:order-2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-pink-600">2025年3月</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">DreamGaussian 生成式3D重建</h3>
+                                <p class="text-gray-600 mb-3">
+                                    清华大学与字节跳动联合提出DreamGaussian，将扩散模型与3DGS深度融合，
+                                    实现了单张图片的高质量3D重建，并且支持语义驱动的场景编辑和生成。
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2 py-0.5 rounded">生成式AI</span>
+                                    <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2 py-0.5 rounded">单图重建</span>
+                                    <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2 py-0.5 rounded">语义编辑</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2025年至今：爆发期 -->
+                    <div class="relative flex items-center">
+                        <div class="flex-1 text-right pr-8 md:w-1/2">
+                            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                                <span class="text-sm font-semibold text-cyan-600">2025年至今</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">技术爆发与产业落地</h3>
+                                <p class="text-gray-600 mb-3">
+                                    3DGS技术进入爆发期，每年数百篇相关论文发表，
+                                    在自动驾驶、工业检测、AR/VR、影视游戏等领域开始规模化应用，
+                                    成为新一代3D内容标准的有力竞争者。
+                                </p>
+                                <div class="flex flex-wrap gap-2 justify-end">
+                                    <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded">产业落地</span>
+                                    <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded">多模态融合</span>
+                                    <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2 py-0.5 rounded">标准制定</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-cyan-500 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <span class="text-white text-xs font-bold">7</span>
+                        </div>
+                        <div class="flex-1 pl-8 md:w-1/2">
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <h4 class="font-semibold mb-2">未来趋势</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 实时交互重建成为标配</li>
+                                    <li>• 与大模型深度融合实现语义理解</li>
+                                    <li>• 成为3D内容分发标准格式</li>
+                                    <li>• 消费级应用大规模普及</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技术全景概览 -->
+        <section class="mb-20">
                 <!-- 2026.03 -->
                 <div class="timeline-item relative mb-12">
                     <div class="bg-white rounded-xl shadow-md p-6">

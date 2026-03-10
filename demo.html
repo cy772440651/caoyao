@@ -172,20 +172,8 @@
                         <div>
                             <h3 class="text-xl font-semibold mb-4">效果对比</h3>
                             <div class="comparison-slider h-[400px] bg-gray-100">
-                                <div class="before flex items-center justify-center">
-                                    <div class="text-center">
-                                        <i class="fa fa-camera text-4xl text-gray-400 mb-2"></i>
-                                        <p class="text-gray-500">传统3DGS (20张图)</p>
-                                        <p class="text-sm text-gray-400 mt-2">PSNR: 32.5dB</p>
-                                    </div>
-                                </div>
-                                <div class="after flex items-center justify-center">
-                                    <div class="text-center">
-                                        <i class="fa fa-bolt text-4xl text-purple-400 mb-2"></i>
-                                        <p class="text-gray-500">GIFSplat (4张图)</p>
-                                        <p class="text-sm text-gray-400 mt-2">PSNR: 31.8dB</p>
-                                    </div>
-                                </div>
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/traditional_3dgs.jpg" alt="传统3DGS (20张图)" class="before w-full h-full object-cover">
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/gifsplat_result.jpg" alt="GIFSplat (4张图)" class="after w-full h-full object-cover">
                                 <div class="slider-handle">
                                     <i class="fa fa-arrows-h text-gray-600"></i>
                                 </div>
@@ -284,20 +272,8 @@ save_model(model, <span class="text-green-400">"./output/gifsplat_model.ply"</sp
                         <div>
                             <h3 class="text-xl font-semibold mb-4">效果对比</h3>
                             <div class="comparison-slider h-[400px] bg-gray-100">
-                                <div class="before flex items-center justify-center">
-                                    <div class="text-center">
-                                        <i class="fa fa-image text-4xl text-gray-400 mb-2"></i>
-                                        <p class="text-gray-500">增强前</p>
-                                        <p class="text-sm text-gray-400 mt-2">PSNR: 30.0dB</p>
-                                    </div>
-                                </div>
-                                <div class="after flex items-center justify-center">
-                                    <div class="text-center">
-                                        <i class="fa fa-magic text-4xl text-blue-400 mb-2"></i>
-                                        <p class="text-gray-500">FreeFix增强后</p>
-                                        <p class="text-sm text-gray-400 mt-2">PSNR: 31.8dB</p>
-                                    </div>
-                                </div>
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/freefix_before.jpg" alt="增强前" class="before w-full h-full object-cover">
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/freefix_after.jpg" alt="FreeFix增强后" class="after w-full h-full object-cover">
                                 <div class="slider-handle">
                                     <i class="fa fa-arrows-h text-gray-600"></i>
                                 </div>
@@ -398,20 +374,8 @@ enhanced_model = enhance(
                         <div>
                             <h3 class="text-xl font-semibold mb-4">效果对比</h3>
                             <div class="comparison-slider h-[400px] bg-gray-100">
-                                <div class="before flex items-center justify-center">
-                                    <div class="text-center">
-                                        <i class="fa fa-ban text-4xl text-gray-400 mb-2"></i>
-                                        <p class="text-gray-500">补全前（有遮挡）</p>
-                                        <p class="text-sm text-gray-400 mt-2">完整度: 60%</p>
-                                    </div>
-                                </div>
-                                <div class="after flex items-center justify-center">
-                                    <div class="text-center">
-                                        <i class="fa fa-check-circle text-4xl text-pink-400 mb-2"></i>
-                                        <p class="text-gray-500">ArtiFixer补全后</p>
-                                        <p class="text-sm text-gray-400 mt-2">完整度: 95%</p>
-                                    </div>
-                                </div>
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/artifixer_before.jpg" alt="补全前（有遮挡）" class="before w-full h-full object-cover">
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/artifixer_after.jpg" alt="ArtiFixer补全后" class="after w-full h-full object-cover">
                                 <div class="slider-handle">
                                     <i class="fa fa-arrows-h text-gray-600"></i>
                                 </div>
@@ -535,18 +499,8 @@ completed_model = enhance(
 
                             <h3 class="text-xl font-semibold mt-8 mb-4">质量对比</h3>
                             <div class="comparison-slider h-[200px] bg-gray-100">
-                                <div class="before flex items-center justify-center">
-                                    <div class="text-center">
-                                        <p class="text-gray-500">传统3DGS (30分钟)</p>
-                                        <p class="text-sm text-gray-400 mt-1">PSNR: 32.5dB</p>
-                                    </div>
-                                </div>
-                                <div class="after flex items-center justify-center">
-                                    <div class="text-center">
-                                        <p class="text-gray-500">InstantGS (30秒)</p>
-                                        <p class="text-sm text-gray-400 mt-1">PSNR: 32.3dB</p>
-                                    </div>
-                                </div>
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/traditional_3dgs_full.jpg" alt="传统3DGS (30分钟)" class="before w-full h-full object-cover">
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/instantgs_result.jpg" alt="InstantGS (30秒)" class="after w-full h-full object-cover">
                                 <div class="slider-handle">
                                     <i class="fa fa-arrows-h text-gray-600"></i>
                                 </div>
