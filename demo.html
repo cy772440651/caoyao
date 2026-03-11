@@ -150,6 +150,15 @@
                 <a href="#artifixer-demo" class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
                     <i class="fa fa-wrench mr-2"></i>ArtiFixer 遮挡补全
                 </a>
+                <a href="#herogs-demo" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                    <i class="fa fa-cubes mr-2"></i>HeroGS 3视图重建
+                </a>
+                <a href="#enton-demo" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                    <i class="fa fa-search-plus mr-2"></i>EntON 密度优化
+                </a>
+                <a href="#gs2m-demo" class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                    <i class="fa fa-diamond mr-2"></i>GS-2M 反光重建
+                </a>
                 <a href="#instantgs-demo" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
                     <i class="fa fa-fast-forward mr-2"></i>InstantGS 训练加速
                 </a>
@@ -453,6 +462,214 @@ completed_model = enhance(
                             <strong>提示词技巧：</strong>
                             提示词需要包含场景类型、期望补全的内容、风格要求，例如"photorealistic building facade, complete missing windows, consistent architectural style"。
                         </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HeroGS 演示 -->
+        <section id="herogs-demo" class="mb-20">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-indigo-500 to-indigo-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-indigo-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-cubes text-indigo-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold">HeroGS - 3视图重建演示</h2>
+                            <p class="text-gray-500">三阶段层次化优化，3张照片达到传统20张照片的重建质量</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">效果对比（3张视图输入）</h3>
+                            <div class="comparison-slider h-[400px] bg-gray-100">
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/baseline_3view.jpg" alt="原生3DGS (3张图)" class="before w-full h-full object-cover">
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/herogs_3view.jpg" alt="HeroGS (3张图)" class="after w-full h-full object-cover">
+                                <div class="slider-handle">
+                                    <i class="fa fa-arrows-h text-gray-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3 text-center">拖动滑块对比：左侧原生3DGS有大量飞点和几何变形，右侧HeroGS重建完整</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">核心特性</h3>
+                            <div class="feature-grid">
+                                <div class="bg-indigo-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-indigo-600 mb-1">3张</div>
+                                    <div class="text-sm text-gray-600">最少输入</div>
+                                </div>
+                                <div class="bg-indigo-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-indigo-600 mb-1">2.3dB</div>
+                                    <div class="text-sm text-gray-600">PSNR提升</div>
+                                </div>
+                                <div class="bg-indigo-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-indigo-600 mb-1">90%</div>
+                                    <div class="text-sm text-gray-600">伪影减少</div>
+                                </div>
+                                <div class="bg-indigo-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-indigo-600 mb-1">95%</div>
+                                    <div class="text-sm text-gray-600">重建成功率</div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-8 mb-4">不同视图数量PSNR对比</h3>
+                            <canvas id="herogsChart" height="220"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-lg mb-2">第一阶段：几何固化</h4>
+                            <p class="text-sm text-gray-600">固定高斯位置，只优化颜色，避免早期几何漂移，建立稳定基础。</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-lg mb-2">第二阶段：几何微调</h4>
+                            <p class="text-sm text-gray-600">小学习率微调高斯位置和缩放，在稳定基础上优化几何细节。</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-lg mb-2">第三阶段：精细优化</h4>
+                            <p class="text-sm text-gray-600">放开所有参数优化，加入密度控制，提升整体细节质量。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EntON 演示 -->
+        <section id="enton-demo" class="mb-20">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-teal-500 to-teal-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-teal-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-search-plus text-teal-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold">EntON - 自适应密度控制演示</h2>
+                            <p class="text-gray-500">特征熵引导的密度优化，细节区域密度提升3倍，整体模型大小几乎不变</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">细节对比</h3>
+                            <div class="comparison-slider h-[400px] bg-gray-100">
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/baseline_density.jpg" alt="原生3DGS密度" class="before w-full h-full object-cover">
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/enton_result.jpg" alt="EntON优化后" class="after w-full h-full object-cover">
+                                <div class="slider-handle">
+                                    <i class="fa fa-arrows-h text-gray-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3 text-center">拖动滑块对比：左侧原生密度均匀，右侧EntON在细节区域自动增加高斯密度</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">核心特性</h3>
+                            <div class="feature-grid">
+                                <div class="bg-teal-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-teal-600 mb-1">3×</div>
+                                    <div class="text-sm text-gray-600">细节密度提升</div>
+                                </div>
+                                <div class="bg-teal-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-teal-600 mb-1">-40%</div>
+                                    <div class="text-sm text-gray-600">几何误差降低</div>
+                                </div>
+                                <div class="bg-teal-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-teal-600 mb-1">+5%</div>
+                                    <div class="text-sm text-gray-600">模型大小增加</div>
+                                </div>
+                                <div class="bg-teal-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-teal-600 mb-1">0.1mm</div>
+                                    <div class="text-sm text-gray-600">几何精度</div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-8 mb-4">密度分布对比</h3>
+                            <canvas id="entonChart" height="220"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-teal-50 border-l-4 border-teal-500 p-4 rounded">
+                        <p class="text-sm text-teal-800">
+                            <strong>技术优势：</strong>
+                            传统密度控制策略是全局统一的，而EntON通过计算每个区域的特征熵，智能地在纹理复杂、边缘锐利的区域分配更多高斯，在平坦区域减少高斯，真正做到了"好钢用在刀刃上"，在不明显增加模型大小的前提下大幅提升细节质量。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GS-2M 演示 -->
+        <section id="gs2m-demo" class="mb-20">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="h-2 bg-gradient-to-r from-amber-500 to-amber-600"></div>
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-amber-100 p-3 rounded-lg mr-4">
+                            <i class="fa fa-diamond text-amber-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold">GS-2M - 高反光表面重建演示</h2>
+                            <p class="text-gray-500">材质感知优化，高反光表面精度提升70%，几何误差小于0.1mm</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">金属零件重建对比</h3>
+                            <div class="comparison-slider h-[400px] bg-gray-100">
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/baseline_metal.jpg" alt="原生3DGS金属重建" class="before w-full h-full object-cover">
+                                <img src="https://raw.githubusercontent.com/cy772440651/caoyao/main/assets/gs2m_metal.jpg" alt="GS-2M金属重建" class="after w-full h-full object-cover">
+                                <div class="slider-handle">
+                                    <i class="fa fa-arrows-h text-gray-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3 text-center">拖动滑块对比：左侧原生3DGS受高光干扰几何变形，右侧GS-2M重建完整精确</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">核心特性</h3>
+                            <div class="feature-grid">
+                                <div class="bg-amber-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-amber-600 mb-1">+70%</div>
+                                    <div class="text-sm text-gray-600">反光表面精度</div>
+                                </div>
+                                <div class="bg-amber-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-amber-600 mb-1">0.08mm</div>
+                                    <div class="text-sm text-gray-600">几何误差</div>
+                                </div>
+                                <div class="bg-amber-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-amber-600 mb-1">2种</div>
+                                    <div class="text-sm text-gray-600">材质分量分离</div>
+                                </div>
+                                <div class="bg-amber-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl font-bold text-amber-600 mb-1">95%</div>
+                                    <div class="text-sm text-gray-600">重建成功率</div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-8 mb-4">高反光场景PSNR对比</h3>
+                            <canvas id="gs2mChart" height="220"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-lg mb-2">漫反射分量</h4>
+                            <p class="text-sm text-gray-600">物体本身的固有颜色，不随视角变化，提供稳定的几何约束。</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-lg mb-2">高光分量</h4>
+                            <p class="text-sm text-gray-600">环境反射产生的高光，随视角变化，通过物理模型单独建模。</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-lg mb-2">PBR渲染方程</h4>
+                            <p class="text-sm text-gray-600">基于物理的渲染公式，准确模拟高光在不同视角下的变化规律。</p>
+                        </div>
                     </div>
                 </div>
             </div>
