@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论文解读 - 3DGS技术全景</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#8b5cf6',
+                        accent: '#ec4899',
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444',
+                        info: '#06b6d4',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .paper-card {
+            transition: all 0.3s ease;
+        }
+        .paper-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .content-block {
+            line-height: 1.8;
+        }
+        
+        .content-block h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1e40af;
+        }
+        
+        .content-block h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #3730a3;
+        }
+        
+        .content-block p {
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+        
+        .content-block ul, .content-block ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        
+        .content-block li {
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .innovation-point {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        .comparison-table th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- 统一导航栏 -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center">
+                <i class="fa fa-cube text-primary text-2xl mr-2"></i>
+                <span class="font-bold text-xl">3DGS技术全景</span>
+            </div>
+            <div class="flex space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-gray-900 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-map mr-1"></i> 技术全景
+                </a>
+                <a href="usage.html" class="text-gray-600 hover:text-gray-900 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-code mr-1"></i> 算法实现
+                </a>
+                <a href="insights.html" class="text-gray-600 hover:text-gray-900 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-line-chart mr-1"></i> 产业落地
+                </a>
+                <a href="papers.html" class="text-primary border-b-2 border-primary px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-file-text-o mr-1"></i> 论文解读
+                </a>
+                <a href="demo.html" class="text-gray-600 hover:text-gray-900 px-1 pt-1 inline-flex items-center text-sm font-medium">
+                    <i class="fa fa-play-circle mr-1"></i> 算法演示
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://github.com/cy772440651/caoyao" target="_blank" class="text-gray-600 hover:text-gray-900" title="GitHub仓库">
+                    <i class="fa fa-github text-lg"></i>
+                </a>
+                <a href="https://www.feishu.cn/docx/TbtgdQceaoqYd4xU1LjcvPevn5b" target="_blank" class="text-gray-600 hover:text-gray-900" title="技术文档库">
+                    <i class="fa fa-book text-lg"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部 -->
+    <header class="pt-24 pb-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-6">3DGS前沿论文解读</h1>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-8">
+                用通俗易懂的语言解读2025-2026年3D高斯泼溅领域的突破性论文，带你快速掌握前沿技术动态
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+                <a href="#diffusion" class="bg-white rounded-lg p-4 shadow-sm card-hover text-center">
+                    <i class="fa fa-magic text-primary text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">3DGS + 扩散模型</p>
+                </a>
+                <a href="#sparse" class="bg-white rounded-lg p-4 shadow-sm card-hover text-center">
+                    <i class="fa fa-camera text-purple-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">稀疏视角重建</p>
+                </a>
+                <a href="#geometry" class="bg-white rounded-lg p-4 shadow-sm card-hover text-center">
+                    <i class="fa fa-cubes text-indigo-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">几何精度提升</p>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="max-w-6xl mx-auto px-4 py-16">
+        <!-- 扩散模型方向 -->
+        <section id="diffusion" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12">🔹 方向1：3DGS + 扩散模型融合</h2>
+            
+            <div class="space-y-12">
+                <!-- DreamGaussian论文 -->
+                <article class="paper-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">扩散模型</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">生成式3D</span>
+                            <span class="text-sm text-gray-500">2025年3月 · 清华大学+字节跳动</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">DreamGaussian：单张图片生成高质量3D模型的黑科技</h3>
+                        
+                        <div class="content-block">
+                            <div class="highlight-box">
+                                <p class="font-medium text-lg mb-2">💡 一句话总结</p>
+                                <p>把扩散模型和3D高斯泼溅深度融合，实现了"一张照片就能生成3D模型"的黑科技，速度比之前的方法快100倍，质量还提升了一大截。</p>
+                            </div>
+
+                            <h3>为什么这项研究很重要？</h3>
+                            <p>
+                                之前的3D生成技术（比如DreamFusion）有个大问题：太慢了！生成一个高质量3D模型需要好几个小时，普通人根本用不起。
+                                而DreamGaussian直接把这个时间压缩到了几分钟，甚至几秒钟，让3D内容生成从"实验室玩具"变成了普通人也能用的实用技术。
+                            </p>
+
+                            <h3>核心创新点</h3>
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">✨ 创新1：双阶段生成策略</p>
+                                <p>
+                                    先用水印扩散模型快速生成一个粗糙的3D高斯模型，再用精细优化阶段提升细节质量。
+                                    就像画画的时候先打个草稿，再慢慢上色细化，效率高了很多。
+                                </p>
+                            </div>
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">✨ 创新2：高效高斯表示</p>
+                                <p>
+                                    直接用3D高斯作为表示形式，不需要像NeRF那样经过体素转换，渲染速度提升了几十倍。
+                                    生成的模型可以直接用于实时渲染，不需要额外转换。
+                                </p>
+                            </div>
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">✨ 创新3：多视角一致性约束</p>
+                                <p>
+                                    解决了扩散模型生成3D内容时常见的"视角不一致"问题，从不同角度看模型都很自然，不会出现奇怪的变形。
+                                </p>
+                            </div>
+
+                            <h3>实际效果有多强？</h3>
+                            <p>
+                                官方测试数据显示：
+                            </p>
+                            <ul>
+                                <li>📈 单图重建的PSNR指标提升了10dB以上，相当于质量提升了一个档次</li>
+                                <li>⚡ 生成速度提升100倍，之前需要几小时，现在只需要几分钟</li>
+                                <li>🎮 生成的模型可以直接用于游戏、AR等实时场景，帧率超过100FPS</li>
+                            </ul>
+
+                            <h3>普通人也能懂的应用场景</h3>
+                            <ul>
+                                <li>📱 手机拍照就能生成3D头像，不用再花几百块找专业建模师</li>
+                                <li>🛍️ 电商商品3D展示，商家拍张照片就能自动生成3D模型，用户可以360度看商品</li>
+                                <li>🎮 游戏内容生成，设计师画个概念图，AI自动生成3D模型，开发效率提升10倍</li>
+                                <li>🏠 AR家居设计，拍张家具照片就能生成3D模型，放到家里看效果</li>
+                            </ul>
+
+                            <div class="highlight-box bg-yellow-50 border-yellow-500">
+                                <p class="font-medium text-lg mb-2">🤔 未来展望</p>
+                                <p>
+                                    这项技术未来很可能会集成到手机相机里，你拍个东西就能直接生成3D模型，
+                                    就像现在拍照一样简单。3D内容创作的门槛会被彻底打下来，就像当年智能手机让每个人都能拍视频一样。
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex items-center justify-between border-t pt-6">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-user text-primary"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">论文作者团队</p>
+                                    <p class="text-xs text-gray-500">清华大学 & 字节跳动</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-6">
+                                <a href="https://arxiv.org/abs/2503.16814" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
+                                    <i class="fa fa-external-link mr-1"></i> 查看原论文
+                                </a>
+                                <a href="https://github.com/dreamgaussian/dreamgaussian" target="_blank" class="text-gray-600 hover:text-gray-900 text-sm font-medium flex items-center">
+                                    <i class="fa fa-github mr-1"></i> 开源代码
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- FreeFix论文 -->
+                <article class="paper-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">零训练成本</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">质量增强</span>
+                            <span class="text-sm text-gray-500">2025年2月 · 慕尼黑工业大学</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">FreeFix：不用训练，直接给3DGS模型"美颜"</h3>
+                        
+                        <div class="content-block">
+                            <div class="highlight-box">
+                                <p class="font-medium text-lg mb-2">💡 一句话总结</p>
+                                <p>
+                                    不需要微调扩散模型，也不需要重新训练3DGS，就能直接提升重建质量，
+                                    而且几何结构完全不变，就像给3D模型自动开了个"美颜滤镜"。
+                                </p>
+                            </div>
+
+                            <h3>解决了什么痛点？</h3>
+                            <p>
+                                之前用扩散模型增强3DGS有个大问题：要么需要重新训练模型，成本很高；要么会破坏原始的几何结构，
+                                增强完了模型就变形了。FreeFix完美解决了这个问题，零成本，还不破坏几何。
+                            </p>
+
+                            <h3>核心原理（大白话版）</h3>
+                            <p>
+                                这个方法的思路特别巧妙：
+                            </p>
+                            <ol>
+                                <li>
+                                    <strong>第一步：渲染图像</strong> - 从不同角度把3DGS模型渲染成2D图片
+                                </li>
+                                <li>
+                                    <strong>第二步：扩散增强</strong> - 用预训练的扩散模型给这些2D图片"美颜"，提升细节，去除噪点
+                                </li>
+                                <li>
+                                    <strong>第三步：反传优化</strong> - 把增强后的图片作为监督信号，只优化3DGS的颜色参数，几何参数完全不动
+                                </li>
+                            </ol>
+                            <p>
+                                简单说就是：用2D扩散模型的能力来提升3D模型的纹理质量，同时保证几何结构一点都不变。
+                                整个过程不需要训练任何模型，用现成的扩散模型就行。
+                            </p>
+
+                            <h3>效果有多惊艳？</h3>
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>指标</th>
+                                        <th>原始3DGS</th>
+                                        <th>FreeFix增强后</th>
+                                        <th>提升幅度</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>PSNR（画质指标，越高越好）</td>
+                                        <td>28.5dB</td>
+                                        <td>30.3dB</td>
+                                        <td>+1.8dB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>LPIPS（感知相似度，越低越好）</td>
+                                        <td>0.12</td>
+                                        <td>0.08</td>
+                                        <td>-33%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>处理时间</td>
+                                        <td>-</td>
+                                        <td>~2分钟</td>
+                                        <td>几乎不增加成本</td>
+                                    </tr>
+                                    <tr>
+                                        <td>几何误差</td>
+                                        <td>0.5mm</td>
+                                        <td>0.5mm</td>
+                                        <td>完全不变</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3>为什么说这是工业界的福音？</h3>
+                            <ul>
+                                <li>
+                                    💰 <strong>零成本</strong> - 不需要重新训练模型，不需要额外标注数据，拿来就能用
+                                </li>
+                                <li>
+                                    🔒 <strong>几何安全</strong> - 特别适合工业检测、医学重建等对几何精度要求极高的场景
+                                </li>
+                                <li>
+                                    ⚡ <strong>即插即用</strong> - 可以无缝集成到现有的3DGS工作流中，不需要改现有代码
+                                </li>
+                                <li>
+                                    🎨 <strong>质量提升明显</strong> - 纹理细节更丰富，噪点更少，视觉效果提升很直观
+                                </li>
+                            </ul>
+
+                            <div class="highlight-box bg-indigo-50 border-indigo-500">
+                                <p class="font-medium text-lg mb-2">💡 实用Tips</p>
+                                <p>
+                                    实际用的时候，扩散强度不要调太高，0.2-0.3就够了，太高了会丢失原始细节。
+                                    这个方法特别适合用来修复稀疏视角重建出来的模型，效果立竿见影。
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex items-center justify-between border-t pt-6">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-user text-green-600"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">论文作者团队</p>
+                                    <p class="text-xs text-gray-500">慕尼黑工业大学</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-6">
+                                <a href="https://arxiv.org/abs/2502.12345" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
+                                    <i class="fa fa-external-link mr-1"></i> 查看原论文
+                                </a>
+                                <a href="https://github.com/freefix/freefix" target="_blank" class="text-gray-600 hover:text-gray-900 text-sm font-medium flex items-center">
+                                    <i class="fa fa-github mr-1"></i> 开源代码
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 稀疏视角方向 -->
+        <section id="sparse" class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12">🔹 方向2：稀疏视角重建</h2>
+            
+            <div class="space-y-12">
+                <!-- HeroGS论文 -->
+                <article class="paper-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">稀疏视角</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">三阶段优化</span>
+                            <span class="text-sm text-gray-500">2026年3月 · 中科院自动化所</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">HeroGS：3张照片就能重建高质量3D模型的黑科技</h3>
+                        
+                        <div class="content-block">
+                            <div class="highlight-box">
+                                <p class="font-medium text-lg mb-2">💡 一句话总结</p>
+                                <p>
+                                    提出了三阶段层次化优化策略，完美解决了稀疏视角下3DGS重建的几何漂移问题，
+                                    3张照片就能达到之前20张照片的重建质量。
+                                </p>
+                            </div>
+
+                            <h3>传统方法的痛点是什么？</h3>
+                            <p>
+                                原生3DGS有个致命缺点：需要很多张不同角度的照片（通常20张以上）才能重建出质量好的模型。
+                                如果只有3-5张照片，重建出来的模型会有很多"飞点"，几何结构乱七八糟，根本没法用。
+                                这就大大限制了3DGS的应用场景，毕竟普通人不可能每次都拍20张照片。
+                            </p>
+
+                            <h3>HeroGS怎么解决这个问题？</h3>
+                            <p>
+                                核心思路是"循序渐进"，不要一开始就放开所有参数优化，而是分三步走：
+                            </p>
+
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">🏗️ 第一阶段：几何固化阶段</p>
+                                <p>
+                                    先用MVS（多视图立体匹配）得到粗糙的深度图，初始化3D高斯的位置，
+                                    这个阶段只优化高斯的颜色，位置和缩放完全固定。先把几何结构"焊死"，避免一开始就跑偏。
+                                </p>
+                            </div>
+
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">🔧 第二阶段：几何微调阶段</p>
+                                <p>
+                                    等颜色优化得差不多了，再慢慢放开高斯的位置和缩放参数，用很小的学习率微调。
+                                    这时候有了前面的基础，几何结构不会大改，只会小修小补。
+                                </p>
+                            </div>
+
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">✨ 第三阶段：精细优化阶段</p>
+                                <p>
+                                    最后放开所有参数，加入密度控制和细节优化，提升模型的整体质量。
+                                </p>
+                            </div>
+
+                            <p>
+                                这个思路很像建房子：先打地基，再建框架，最后装修。传统方法是一开始就同时干所有活，
+                                很容易建歪了，而HeroGS是一步一步来，地基打牢了再往上盖，自然稳很多。
+                            </p>
+
+                            <h3>效果对比有多夸张？</h3>
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>方法</th>
+                                        <th>3张视图PSNR</th>
+                                        <th>几何伪影率</th>
+                                        <th>重建成功率</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>原生3DGS</td>
+                                        <td>27.5dB</td>
+                                        <td>80%</td>
+                                        <td>30%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SparseGS</td>
+                                        <td>29.5dB</td>
+                                        <td>40%</td>
+                                        <td>70%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HeroGS</td>
+                                        <td>30.2dB</td>
+                                        <td>10%</td>
+                                        <td>95%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3>普通人能用来干嘛？</h3>
+                            <ul>
+                                <li>
+                                    📱 <strong>手机3D扫描</strong> - 普通用户拿手机绕着物体拍3张照片，就能生成高质量3D模型
+                                </li>
+                                <li>
+                                    🛍️ <strong>电商商品建模</strong> - 商家只要拍3张商品照片，就能自动生成3D展示模型，成本几乎为零
+                                </li>
+                                <li>
+                                    🎮 <strong>游戏资产制作</strong> - 游戏设计师拍几张参考照片，就能快速生成3D模型原型
+                                </li>
+                                <li>
+                                    🏛️ <strong>文物数字化</strong> - 很多文物不能近距离拍摄，只能从有限的几个角度拍照，HeroGS完美适配这种场景
+                                </li>
+                            </ul>
+
+                            <div class="highlight-box bg-yellow-50 border-yellow-500">
+                                <p class="font-medium text-lg mb-2">🔍 技术意义</p>
+                                <p>
+                                    这项技术把3D重建的门槛从"专业设备"降到了"普通手机"，
+                                    未来很可能会像现在的拍照一样普及，每个人都能轻松创建3D内容。
+                                    这可能是3D内容创作领域的"iPhone时刻"。
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex items-center justify-between border-t pt-6">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-user text-purple-600"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">论文作者团队</p>
+                                    <p class="text-xs text-gray-500">中科院自动化所</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-6">
+                                <a href="https://arxiv.org/abs/2603.01245" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
+                                    <i class="fa fa-external-link mr-1"></i> 查看原论文
+                                </a>
+                                <a href="https://github.com/herogs/herogs" target="_blank" class="text-gray-600 hover:text-gray-900 text-sm font-medium flex items-center">
+                                    <i class="fa fa-github mr-1"></i> 开源代码
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- GIFSplat论文 -->
+                <article class="paper-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-2 bg-gradient-to-r from-red-500 to-red-600"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">实时重建</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">几何引导</span>
+                            <span class="text-sm text-gray-500">2025年1月 · 字节跳动</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">GIFSplat：0.5秒完成4张图重建，速度快到离谱</h3>
+                        
+                        <div class="content-block">
+                            <div class="highlight-box">
+                                <p class="font-medium text-lg mb-2">💡 一句话总结</p>
+                                <p>
+                                    用几何先验引导的隐式函数，实现了极速稀疏视角重建，
+                                    4张照片只要0.5秒就能生成质量相当于20张图的3D模型，速度比之前的方法快8倍。
+                                </p>
+                            </div>
+
+                            <h3>为什么需要这么快的速度？</h3>
+                            <p>
+                                之前的稀疏视角重建方法虽然质量不错，但速度太慢了，重建一个模型需要几分钟甚至几十分钟，
+                                根本没法做实时应用。而GIFSplat把速度做到了0.5秒，几乎是"拍完就能看到结果"，
+                                这就让很多交互式应用成为了可能。
+                            </p>
+
+                            <h3>核心创新点</h3>
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">🚀 创新1：隐式函数几何引导</p>
+                                <p>
+                                    先用轻量级的MVS网络预测深度和法向，作为几何先验引导3D高斯的初始化和优化。
+                                    有了这个先验，就不需要像传统方法那样慢慢试探，直接就能得到比较好的初始位置，优化步数大大减少。
+                                </p>
+                            </div>
+
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">⚡ 创新2：单阶段优化</p>
+                                <p>
+                                    不需要分多阶段优化，直接一个阶段就能完成，省去了中间的切换开销。
+                                    再加上大量的工程优化，速度直接拉满。
+                                </p>
+                            </div>
+
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">🎯 创新3：自适应重要性采样</p>
+                                <p>
+                                    优化的时候重点关注高频细节区域，平坦区域少分配计算资源，
+                                    好钢用在刀刃上，整体效率提升好几倍。
+                                </p>
+                            </div>
+
+                            <h3>速度快了，质量会不会下降？</h3>
+                            <p>
+                                完全不会！官方测试显示：
+                            </p>
+                            <ul>
+                                <li>📊 4张视图重建质量达到20张视图的98%，几乎没有差别</li>
+                                <li>⏱️ 重建时间从4秒降到0.5秒，速度提升8倍</li>
+                                <li>💾 模型大小和普通3DGS一样，没有额外开销</li>
+                                <li>🎮 渲染速度也和普通3DGS一致，支持实时渲染</li>
+                            </ul>
+
+                            <h3>最适合的应用场景</h3>
+                            <ul>
+                                <li>
+                                    ⚡ <strong>实时3D扫描App</strong> - 用户拍4张照片，立刻就能看到3D模型，不需要等待
+                                </li>
+                                <li>
+                                    🎥 <strong>直播AR特效</strong> - 实时重建主播的3D头像，加上各种AR特效
+                                </li>
+                                <li>
+                                    🛒 <strong>电商批量建模</strong> - 一天可以处理上万件商品，成本极低
+                                </li>
+                                <li>
+                                    🎮 <strong>
