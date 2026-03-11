@@ -27,6 +27,153 @@
             }
         }
     </script>
+
+    <!-- 图表初始化脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 对比滑块功能
+            document.querySelectorAll('.comparison-slider').forEach(slider => {
+                const before = slider.querySelector('.before');
+                const handle = slider.querySelector('.slider-handle');
+                let isDragging = false;
+
+                function moveSlider(e) {
+                    if (!isDragging) return;
+                    const rect = slider.getBoundingClientRect();
+                    let x = e.clientX - rect.left;
+                    x = Math.max(0, Math.min(x, rect.width));
+                    const percent = (x / rect.width) * 100;
+                    before.style.width = percent + '%';
+                    handle.style.left = percent + '%';
+                }
+
+                slider.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    moveSlider(e);
+                });
+                window.addEventListener('mousemove', moveSlider);
+                window.addEventListener('mouseup', () => isDragging = false);
+
+                // 触摸支持
+                slider.addEventListener('touchstart', (e) => {
+                    isDragging = true;
+                    moveSlider(e.touches[0]);
+                });
+                window.addEventListener('touchmove', (e) => moveSlider(e.touches[0]));
+                window.addEventListener('touchend', () => isDragging = false);
+            });
+
+            // HeroGS图表
+            if (document.getElementById('herogsChart')) {
+                new Chart(document.getElementById('herogsChart'), {
+                    type: 'line',
+                    data: {
+                        labels: ['3张视图', '4张视图', '5张视图', '10张视图', '20张视图'],
+                        datasets: [
+                            {
+                                label: '原生3DGS',
+                                data: [27.5, 29.8, 30.5, 31.8, 32.5],
+                                borderColor: '#9ca3af',
+                                backgroundColor: 'rgba(156, 163, 175, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            },
+                            {
+                                label: 'HeroGS',
+                                data: [30.2, 31.5, 32.1, 32.6, 32.8],
+                                borderColor: '#8b5cf6',
+                                backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'top' },
+                            title: { display: true, text: 'PSNR (dB) 越高越好' }
+                        },
+                        scales: { y: { min: 27, max: 34 } }
+                    }
+                });
+            }
+
+            // EntON图表
+            if (document.getElementById('entonChart')) {
+                new Chart(document.getElementById('entonChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['平坦区域', '普通纹理', '边缘区域', '复杂细节'],
+                        datasets: [
+                            {
+                                label: '原生3DGS',
+                                data: [100, 100, 100, 100],
+                                backgroundColor: '#9ca3af'
+                            },
+                            {
+                                label: 'EntON',
+                                data: [30, 80, 220, 300],
+                                backgroundColor: '#14b8a6'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'top' },
+                            title: { display: true, text: '相对高斯密度 (百分比)' }
+                        }
+                    }
+                });
+            }
+
+            // GS-2M图表
+            if (document.getElementById('gs2mChart')) {
+                new Chart(document.getElementById('gs2mChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['漫反射表面', '弱反光', '中等反光', '强反光', '镜面'],
+                        datasets: [
+                            {
+                                label: '原生3DGS',
+                                data: [28.5, 26.2, 24.3, 22.3, 18.5],
+                                backgroundColor: '#9ca3af'
+                            },
+                            {
+                                label: 'GS-2M',
+                                data: [28.7, 28.2, 27.5, 26.4, 24.3],
+                                backgroundColor: '#f59e0b'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'top' },
+                            title: { display: true, text: 'PSNR (dB) 越高越好' }
+                        },
+                        scales: { y: { min: 15, max: 30 } }
+                    }
+                });
+            }
+
+            // 标签页切换功能
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tab = btn.dataset.tab;
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('text-primary', 'border-primary', 'border-b-2'));
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.add('text-gray-500', 'hover:text-gray-700'));
+                    btn.classList.add('text-primary', 'border-primary', 'border-b-2');
+                    btn.classList.remove('text-gray-500', 'hover:text-gray-700');
+                    
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    document.getElementById(tab).classList.add('active');
+                });
+            });
+        });
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
