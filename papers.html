@@ -280,6 +280,130 @@
                     </div>
                 </article>
 
+                <!-- ArtiFixer论文 -->
+                <article class="paper-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-2 bg-gradient-to-r from-cyan-500 to-cyan-600"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-cyan-100 text-cyan-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">场景补全</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded mr-3">文本引导</span>
+                            <span class="text-sm text-gray-500">2025年3月 · Google DeepMind</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">ArtiFixer：自动补全3D场景遮挡区域的黑科技</h3>
+                        
+                        <div class="content-block">
+                            <div class="highlight-box">
+                                <p class="font-medium text-lg mb-2">💡 一句话总结</p>
+                                <p>用自回归扩散模型实现3D高斯场景的遮挡区域智能补全，还支持文本引导生成，场景完整度提升40%，语义合理性高达95%。</p>
+                            </div>
+
+                            <h3>解决了什么行业痛点？</h3>
+                            <p>
+                                3D扫描的时候总有遮挡：比如扫描房间的时候家具挡住了墙角，扫描文物的时候有部分残缺，扫描人体的时候背面拍不到。
+                                传统方法要么留着空洞，要么补全的内容乱七八糟不符合逻辑。ArtiFixer完美解决了这个问题，不仅能补全，还能补得合情合理。
+                            </p>
+
+                            <h3>核心创新点</h3>
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">✨ 创新1：自回归扩散补全架构</p>
+                                <p>
+                                    把3D场景分成多个小patch，像人画画一样从已知区域向未知区域逐步补全，而不是一次性生成整个区域，
+                                    这样补全的内容和现有场景的过渡非常自然，不会有明显的拼接痕迹。
+                                </p>
+                            </div>
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">✨ 创新2：文本引导生成</p>
+                                <p>
+                                    支持用自然语言控制补全内容，比如你可以说"把遮挡的区域补成一个木质书架"，
+                                    模型就会按照你的描述生成符合场景风格的内容，创意空间直接拉满。
+                                </p>
+                            </div>
+                            <div class="innovation-point">
+                                <p class="font-medium mb-2">✨ 创新3：多视角一致性约束</p>
+                                <p>
+                                    补全的时候同时考虑多个视角的合理性，保证从不同角度看补全的内容都是一致的，
+                                    不会出现"从正面看是书架，从侧面看就变成墙壁"的违和情况。
+                                </p>
+                            </div>
+
+                            <h3>效果有多强？</h3>
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>指标</th>
+                                        <th>传统补全方法</th>
+                                        <th>ArtiFixer</th>
+                                        <th>提升幅度</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>场景完整度</td>
+                                        <td>60%</td>
+                                        <td>100%</td>
+                                        <td>+40%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>语义合理性</td>
+                                        <td>65%</td>
+                                        <td>95%</td>
+                                        <td>+30%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>补全区域PSNR</td>
+                                        <td>24.2dB</td>
+                                        <td>26.7dB</td>
+                                        <td>+2.5dB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>多视角一致性</td>
+                                        <td>70%</td>
+                                        <td>98%</td>
+                                        <td>+28%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3>普通人也能懂的应用场景</h3>
+                            <ul>
+                                <li>🏛️ <strong>文物修复</strong> - 破损的文物扫描后自动补全残缺部分，做虚拟修复和研究</li>
+                                <li>🏠 <strong>室内扫描</strong> - 扫描房间时自动补全被家具遮挡的墙面、地面区域</li>
+                                <li>🎮 <strong>游戏内容创作</strong> - 文本引导快速生成3D场景，不用一个个建模</li>
+                                <li>🎬 <strong>影视特效</strong> - 快速补全拍摄时被遮挡的场景，减少后期制作工作量</li>
+                                <li>🛡️ <strong>数字孪生</strong> - 工业场景扫描时自动补全被设备遮挡的区域，生成完整数字孪生模型</li>
+                            </ul>
+
+                            <div class="highlight-box bg-yellow-50 border-yellow-500">
+                                <p class="font-medium text-lg mb-2">🤔 技术意义</p>
+                                <p>
+                                    这项技术让3D扫描从"部分可用"变成了"完全可用"，之前很多因为遮挡问题无法落地的场景现在都可以实现了。
+                                    配合文本引导功能，更是大大降低了3D内容创作的门槛，普通人说几句话就能生成想要的3D场景。
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex items-center justify-between border-t pt-6">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-cyan-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-user text-cyan-600"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">论文作者团队</p>
+                                    <p class="text-xs text-gray-500">Google DeepMind</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-6">
+                                <a href="https://arxiv.org/abs/2503.08765" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
+                                    <i class="fa fa-external-link mr-1"></i> 查看原论文
+                                </a>
+                                <a href="https://github.com/artifixer/artifixer" target="_blank" class="text-gray-600 hover:text-gray-900 text-sm font-medium flex items-center">
+                                    <i class="fa fa-github mr-1"></i> 开源代码
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
                 <!-- FreeFix论文 -->
                 <article class="paper-card bg-white rounded-xl shadow-md overflow-hidden">
                     <div class="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
