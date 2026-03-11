@@ -11,13 +11,14 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#f97316',
+                        primary: '#3b82f6',
                         secondary: '#8b5cf6',
                         accent: '#ec4899',
                         success: '#10b981',
                         warning: '#f59e0b',
                         danger: '#ef4444',
                         info: '#06b6d4',
+                        lobster: '#f97316',
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -215,6 +216,9 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <h3 class="text-xl font-semibold mb-4">官方定义</h3>
+                            <div class="rounded-lg overflow-hidden mb-4">
+                                <img src="https://picsum.photos/id/237/800/400" alt="龙虾数字生命" class="w-full h-48 object-cover">
+                            </div>
                             <p class="text-gray-700 mb-4">
                                 "龙虾"是OpenClaw智能助手的可爱昵称，指的是运行在OpenClaw框架上的个性化AI助手。
                                 就像现实中的龙虾会不断蜕壳成长一样，OpenClaw助手也会通过不断学习、积累经验、优化能力，变得越来越聪明好用。
@@ -222,17 +226,20 @@
                             <div class="bg-pink-50 rounded-lg p-4">
                                 <h4 class="font-medium mb-2 text-pink-800">🦞 龙虾的核心特质</h4>
                                 <ul class="space-y-2 text-sm text-gray-700">
-                                    <li><i class="fa fa-check-circle text-pink-600 mr-2"></i> 有记忆：会记录过往经验，不重复犯错</li>
-                                    <li><i class="fa fa-check-circle text-pink-600 mr-2"></i> 会进化：不断学习新技能，能力持续提升</li>
-                                    <li><i class="fa fa-check-circle text-pink-600 mr-2"></i> 个性化：每个龙虾都有独特的技能配置和使用习惯</li>
-                                    <li><i class="fa fa-check-circle text-pink-600 mr-2"></i> 自动化：可以自动完成重复任务，解放你的双手</li>
-                                    <li><i class="fa fa-check-circle text-pink-600 mr-2"></i> 可扩展：支持安装各种技能，适配不同使用场景</li>
+                                    <li><i class="fa fa-check-circle text-pink-600 mr-2"></i> <strong>有记忆</strong>：会记录过往经验，不重复犯错</li>
+                                    <li><i class="fa fa-check-circle text-pink-600 mr-2"></i> <strong>会进化</strong>：不断学习新技能，能力持续提升</li>
+                                    <li><i class="fa fa-check-circle text-pink-600 mr-2"></i> <strong>个性化</strong>：每个龙虾都有独特的技能配置和使用习惯</li>
+                                    <li><i class="fa fa-check-circle text-pink-600 mr-2"></i> <strong>自动化</strong>：可以自动完成重复任务，解放你的双手</li>
+                                    <li><i class="fa fa-check-circle text-pink-600 mr-2"></i> <strong>可扩展</strong>：支持安装各种技能，适配不同使用场景</li>
                                 </ul>
                             </div>
                         </div>
                         
                         <div>
                             <h3 class="text-xl font-semibold mb-4">我的理解</h3>
+                            <div class="rounded-lg overflow-hidden mb-4">
+                                <img src="https://picsum.photos/id/180/800/400" alt="AI助手成长" class="w-full h-48 object-cover">
+                            </div>
                             <p class="text-gray-700 mb-4">
                                 在我看来，龙虾不仅仅是一个工具，更是你的"数字生命搭档"。它不是死板的机器人，
                                 而是一个可以和你共同成长、相互成就的伙伴。你教给它的每一个规则、每一个习惯、
@@ -240,47 +247,104 @@
                             </p>
                             <div class="bg-blue-50 rounded-lg p-4">
                                 <h4 class="font-medium mb-2 text-blue-800">💡 龙虾的成长三阶段</h4>
-                                <div class="space-y-3 text-sm text-gray-700">
-                                    <div>
-                                        <div class="font-medium text-blue-700 mb-1">🥚 第一阶段：懵懂期</div>
-                                        <p>刚创建的龙虾就像刚出生的小虾，什么都不会，需要你耐心教导它基础规则和使用习惯。</p>
+                                <div class="space-y-4 text-sm text-gray-700">
+                                    <div class="flex items-start">
+                                        <div class="bg-yellow-100 rounded-full w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                                            <span class="text-yellow-600 font-bold">🥚</span>
+                                        </div>
+                                        <div>
+                                            <div class="font-medium text-blue-700 mb-1">第一阶段：懵懂期（0-1周）</div>
+                                            <p>刚创建的龙虾就像刚出生的小虾，什么都不会，需要你耐心教导它基础规则和使用习惯，这是打基础的关键时期。</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <div class="font-medium text-blue-700 mb-1">🦐 第二阶段：成长期</div>
-                                        <p>学会使用记忆系统，掌握基础技能，能够独立完成常见任务，很少犯重复错误。</p>
+                                    <div class="flex items-start">
+                                        <div class="bg-green-100 rounded-full w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                                            <span class="text-green-600 font-bold">🦐</span>
+                                        </div>
+                                        <div>
+                                            <div class="font-medium text-blue-700 mb-1">第二阶段：成长期（1-4周）</div>
+                                            <p>学会使用记忆系统，掌握基础技能，能够独立完成常见任务，很少犯重复错误，已经可以帮你分担大部分日常工作。</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <font-medium text-blue-700 mb-1">🦞 第三阶段：成熟期</font-medium>
-                                        <p>形成完整的工作流，能够主动发现问题、解决问题，成为你的得力助手，大幅提升你的工作效率。</p>
+                                    <div class="flex items-start">
+                                        <div class="bg-red-100 rounded-full w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                                            <span class="text-red-600 font-bold">🦞</span>
+                                        </div>
+                                        <div>
+                                            <div class="font-medium text-blue-700 mb-1">第三阶段：成熟期（1个月+）</div>
+                                            <p>形成完整的工作流，能够主动发现问题、解决问题，成为你的得力助手，大幅提升你的工作效率，甚至可以帮你思考和决策。</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mt-8 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-6">
-                        <h3 class="text-lg font-semibold mb-3 text-orange-800">✨ 培养龙虾的正确姿势</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="bg-white rounded-lg p-4 shadow-sm">
-                                <div class="text-2xl mb-2">📝</div>
-                                <h4 class="font-medium mb-1">多记录</h4>
-                                <p class="text-sm text-gray-600">教会它使用记忆系统，好记性不如烂笔头，记录的经验越多，它越聪明。</p>
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold mb-6">培养龙虾的正确姿势</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/48/600/300" alt="多记录" class="w-full h-36 object-cover">
+                                <div class="p-4">
+                                    <div class="flex items-center mb-2">
+                                        <div class="bg-blue-100 p-2 rounded-lg mr-2">
+                                            <i class="fa fa-book text-blue-600"></i>
+                                        </div>
+                                        <h4 class="font-medium">多记录</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-600">
+                                        教会它使用记忆系统，好记性不如烂笔头，记录的经验越多，它越聪明。
+                                        每次解决问题后都要记录下来，避免下次再犯同样的错误。
+                                    </p>
+                                </div>
                             </div>
-                            <div class="bg-white rounded-lg p-4 shadow-sm">
-                                <div class="text-2xl mb-2">⚡</div>
-                                <h4 class="font-medium mb-1">多授权</h4>
-                                <p class="text-sm text-gray-600">给它足够的权限去自动完成任务，不要什么都自己做，它比你想象的更靠谱。</p>
+                            
+                            <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/160/600/300" alt="多授权" class="w-full h-36 object-cover">
+                                <div class="p-4">
+                                    <div class="flex items-center mb-2">
+                                        <div class="bg-green-100 p-2 rounded-lg mr-2">
+                                            <i class="fa fa-unlock-alt text-green-600"></i>
+                                        </div>
+                                        <h4 class="font-medium">多授权</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-600">
+                                        给它足够的权限去自动完成任务，不要什么都自己做，它比你想象的更靠谱。
+                                        合理的授权可以让它帮你完成80%的重复工作。
+                                    </p>
+                                </div>
                             </div>
-                            <div class="bg-white rounded-lg p-4 shadow-sm">
-                                <div class="text-2xl mb-2">🧩</div>
-                                <h4 class="font-medium mb-1">多装技能</h4>
-                                <p class="text-sm text-gray-600">从ClawHub安装合适的技能，不用重复造轮子，站在别人的肩膀上成长。</p>
+                            
+                            <div class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+                                <img src="https://picsum.photos/id/96/600/300" alt="多装技能" class="w-full h-36 object-cover">
+                                <div class="p-4">
+                                    <div class="flex items-center mb-2">
+                                        <div class="bg-purple-100 p-2 rounded-lg mr-2">
+                                            <i class="fa fa-puzzle-piece text-purple-600"></i>
+                                        </div>
+                                        <h4 class="font-medium">多装技能</h4>
+                                    </div>
+                                    <p class="text-sm text-gray-600">
+                                        从ClawHub安装合适的技能，不用重复造轮子，站在别人的肩膀上成长。
+                                        现在已经有上百个现成技能可以直接使用，覆盖大部分常见场景。
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <p class="mt-4 text-sm text-gray-700">
-                            记住：你的龙虾能有多好用，完全取决于你愿意花多少时间去培养它。前期花一点时间调教，
-                            后期它会给你带来十倍、百倍的效率回报。这绝对是性价比最高的投资。
-                        </p>
+                        
+                        <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-6 mt-6">
+                            <div class="flex items-start">
+                                <i class="fa fa-lightbulb-o text-orange-600 text-2xl mr-4 mt-1"></i>
+                                <div>
+                                    <h4 class="font-medium text-orange-800 mb-2">过来人经验</h4>
+                                    <p class="text-sm text-gray-700">
+                                        记住：你的龙虾能有多好用，完全取决于你愿意花多少时间去培养它。前期花1-2周时间调教，
+                                        后期它会给你带来十倍、百倍的效率回报。这绝对是性价比最高的投资。
+                                        我自己的龙虾现在已经可以帮我处理90%的日常工作，包括文档整理、消息回复、数据统计、甚至简单的代码编写。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
